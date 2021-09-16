@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold;
+    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel,avoidObstaclesPanel,goldCoinPanel;
 
     public TextMeshProUGUI earnedGoldText, totalGoldText, sliderLevelText;
 

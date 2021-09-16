@@ -1109,6 +1109,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1034089438, guid: 2b07c3e9c5c92f143ae016d86c901598, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1488462663, guid: 2b07c3e9c5c92f143ae016d86c901598, type: 3}
       propertyPath: m_MaxValue
       value: 5
@@ -1141,7 +1145,7 @@ PrefabInstance:
     - target: {fileID: 13011117337304664, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 586.2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 13011117337304664, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
@@ -1306,12 +1310,12 @@ GameObject:
   - component: {fileID: 974535872932841510}
   - component: {fileID: 974535872932841513}
   m_Layer: 0
-  m_Name: ObstaclePanel
+  m_Name: AvoidObstaclePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &974535872987020424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,12 +2056,12 @@ GameObject:
   - component: {fileID: 974535873442808450}
   - component: {fileID: 974535873442808453}
   m_Layer: 0
-  m_Name: DoorObjectPanel
+  m_Name: PickObjectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &974535873472928982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,13 +2421,26 @@ GameObject:
   - component: {fileID: 974535873720990208}
   - component: {fileID: 974535873720990211}
   - component: {fileID: 974535873720990210}
+  - component: {fileID: 974535873720990216}
   m_Layer: 0
-  m_Name: PickWeaponTrigger
+  m_Name: PickObjectTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &974535873720990216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974535873720990215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1adf81a75f465299b41c4a1bb0174c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &974535873835420750
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2496,8 +2513,9 @@ GameObject:
   - component: {fileID: 974535873835420751}
   - component: {fileID: 974535873835420750}
   - component: {fileID: 974535873835420753}
+  - component: {fileID: 974535873835420756}
   m_Layer: 0
-  m_Name: DeathDrinkTrigger
+  m_Name: AvoidObstaclesTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2517,6 +2535,18 @@ Transform:
   m_Father: {fileID: 974535874818621759}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974535873835420756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974535873835420754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493ca98af6bd41c88e7e4571956f9339, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &974535873963036564
 Canvas:
   m_ObjectHideFlags: 0
@@ -3197,6 +3227,7 @@ GameObject:
   - component: {fileID: 974535874338180284}
   - component: {fileID: 974535874338180287}
   - component: {fileID: 974535874338180286}
+  - component: {fileID: 974535874338180420}
   m_Layer: 0
   m_Name: GoldCoinTrigger
   m_TagString: Untagged
@@ -3204,6 +3235,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &974535874338180420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974535874338180419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7435204b424e1e9f2ab5455b35ed1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &974535874345544626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5437,6 +5480,9 @@ MonoBehaviour:
   distanceFinish: {fileID: 4154017309644021422}
   particleCollectableGold: {fileID: 143964, guid: 09d9de58ef3bf5444ac94afa0e6013cb,
     type: 3}
+  pickObjectPanel: {fileID: 974535873442808455}
+  avoidObstaclesPanel: {fileID: 974535872932841515}
+  goldCoinPanel: {fileID: 974535874012515497}
   earnedGoldText: {fileID: 6870013699264063134}
   totalGoldText: {fileID: 6870013699909839414}
   sliderLevelText: {fileID: 1181029499453661431}

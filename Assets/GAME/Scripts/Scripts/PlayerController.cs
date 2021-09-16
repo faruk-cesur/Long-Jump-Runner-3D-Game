@@ -110,6 +110,24 @@ public class PlayerController : MonoBehaviour
             Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
         }
+        
+        GoldCoinPanel goldCoinPanel = other.GetComponentInParent<GoldCoinPanel>();
+        if (goldCoinPanel)
+        {
+            UIManager.Instance.goldCoinPanel.SetActive(false);
+            UIManager.Instance.avoidObstaclesPanel.SetActive(true);
+        }
+        AvoidObstaclePanel avoidObstaclePanel = other.GetComponentInParent<AvoidObstaclePanel>();
+        if (avoidObstaclePanel)
+        {
+            UIManager.Instance.avoidObstaclesPanel.SetActive(false);
+            UIManager.Instance.pickObjectPanel.SetActive(true);
+        }
+        PickObjectPanel pickObjectPanel = other.GetComponentInParent<PickObjectPanel>();
+        if (pickObjectPanel)
+        {
+            UIManager.Instance.pickObjectPanel.SetActive(false);
+        }
     }
 
     #endregion
