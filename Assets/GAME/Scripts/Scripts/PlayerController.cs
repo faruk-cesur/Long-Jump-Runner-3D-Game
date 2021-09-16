@@ -79,12 +79,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Collectable collectable = other.GetComponentInParent<Collectable>();
-        if (collectable)
+        CollectableGold collectableGold = other.GetComponentInParent<CollectableGold>();
+        if (collectableGold)
         {
             UIManager.Instance.gold++;
-            //Instantiate(particleCollectable, playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 0.4f);
+            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
     }
