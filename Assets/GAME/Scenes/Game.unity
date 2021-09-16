@@ -630,6 +630,18 @@ Transform:
   m_Father: {fileID: 1553310179403345741}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1488462663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1488462663, guid: 2b07c3e9c5c92f143ae016d86c901598,
+    type: 3}
+  m_PrefabInstance: {fileID: 13011117651089328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1497931902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,10 +1109,24 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1488462663, guid: 2b07c3e9c5c92f143ae016d86c901598, type: 3}
+      propertyPath: m_MaxValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 13011117337304661, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 13011117337304663, guid: 2b07c3e9c5c92f143ae016d86c901598,
+        type: 3}
+      propertyPath: _runSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 13011117337304663, guid: 2b07c3e9c5c92f143ae016d86c901598,
+        type: 3}
+      propertyPath: _runSpeedd
+      value: -23.76
       objectReference: {fileID: 0}
     - target: {fileID: 13011117337304664, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
@@ -1115,7 +1141,7 @@ PrefabInstance:
     - target: {fileID: 13011117337304664, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 586.2
       objectReference: {fileID: 0}
     - target: {fileID: 13011117337304664, guid: 2b07c3e9c5c92f143ae016d86c901598,
         type: 3}
@@ -1171,13 +1197,26 @@ GameObject:
   - component: {fileID: 5796636950897741065}
   - component: {fileID: 6647868550798093453}
   - component: {fileID: 4451942329125504948}
+  - component: {fileID: 519178855890712488}
   m_Layer: 0
-  m_Name: UselessDoor
+  m_Name: WrongDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &519178855890712488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519178855890712487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67b8699392e54e118f3a85edc73fd27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &827973198639812118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1256,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 974535873095110690}
-  - {fileID: 974535874011454996}
   - {fileID: 974535873250005067}
   m_Father: {fileID: 974535874815562503}
   m_RootOrder: 1
@@ -1268,12 +1306,12 @@ GameObject:
   - component: {fileID: 974535872932841510}
   - component: {fileID: 974535872932841513}
   m_Layer: 0
-  m_Name: CollectableDeathPanel
+  m_Name: ObstaclePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &974535872987020424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Avoid                   Death Drinks
+  m_text: Avoid                   Obstacles
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990ab47cc9393fa44848752d1fc127f6, type: 2}
   m_sharedMaterial: {fileID: 7097076281067079481, guid: 990ab47cc9393fa44848752d1fc127f6,
@@ -1803,11 +1841,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 974535872932841512}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4}
+  m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &974535873384098998
@@ -2014,7 +2052,7 @@ GameObject:
   - component: {fileID: 974535873442808450}
   - component: {fileID: 974535873442808453}
   m_Layer: 0
-  m_Name: PickWeaponPanel
+  m_Name: DoorObjectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2035,7 +2073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &974535873472928983
 Transform:
   m_ObjectHideFlags: 0
@@ -2075,7 +2113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 13}
+  m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 16, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &974535873498601095
@@ -2097,7 +2135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Collect         Energy Drinks!
+  m_text: Collect            Gold Coins!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990ab47cc9393fa44848752d1fc127f6, type: 2}
   m_sharedMaterial: {fileID: 7097076281067079481, guid: 990ab47cc9393fa44848752d1fc127f6,
@@ -2202,14 +2240,14 @@ RectTransform:
   m_GameObject: {fileID: 974535873628228973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.80103, z: 0.80103}
+  m_LocalScale: {x: 1.2166, y: 0.91244996, z: 1.2166}
   m_Children: []
   m_Father: {fileID: 974535874012515494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 7}
+  m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &974535873628228971
@@ -2225,13 +2263,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a8e8552190c1dbe4895dd9d0202b8093, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c95033df552a2444d89c6cac8598cf5b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2578,80 +2616,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &974535874011454994
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974535874011454999}
-  m_CullTransparentMesh: 0
---- !u!224 &974535874011454996
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974535874011454999}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.80103, z: 0.80103}
-  m_Children: []
-  m_Father: {fileID: 974535872932841512}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 9}
-  m_SizeDelta: {x: 5, y: 5}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &974535874011454997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974535874011454999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32c7ae99f883d8b4184cdf5969f956c8, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 0
-  m_FillAmount: 0.703
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 94.64
---- !u!1 &974535874011454999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 974535874011454996}
-  - component: {fileID: 974535874011454994}
-  - component: {fileID: 974535874011454997}
-  m_Layer: 0
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!222 &974535874012515492
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2722,7 +2686,7 @@ GameObject:
   - component: {fileID: 974535874012515492}
   - component: {fileID: 974535874012515495}
   m_Layer: 0
-  m_Name: CollectableEnergyPanel
+  m_Name: GoldCoinPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3234,7 +3198,7 @@ GameObject:
   - component: {fileID: 974535874338180287}
   - component: {fileID: 974535874338180286}
   m_Layer: 0
-  m_Name: EnergyDrinkTrigger
+  m_Name: GoldCoinTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3259,7 +3223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pick a weapon to smash the wall!
+  m_text: Pick The Suitable Object To Speed Up!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990ab47cc9393fa44848752d1fc127f6, type: 2}
   m_sharedMaterial: {fileID: 7097076281067079481, guid: 990ab47cc9393fa44848752d1fc127f6,
@@ -3287,12 +3251,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2
+  m_fontSize: 1.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 1
-  m_fontSizeMax: 2
+  m_fontSizeMax: 1.85
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -5226,7 +5190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d1b5f213323d69d4c81d2dcd954cb49a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a99ffe0f835b9043b0052f91d911b27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5469,6 +5433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 918292967}
   distanceSlider: {fileID: 1181029500195230320}
+  energySlider: {fileID: 1488462663}
   distanceFinish: {fileID: 4154017309644021422}
   particleCollectableGold: {fileID: 143964, guid: 09d9de58ef3bf5444ac94afa0e6013cb,
     type: 3}
@@ -5548,7 +5513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 932c9a679d6eb244784c9320ae8764cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57b1311674987ba4da5643dfa9cb7b24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6264,13 +6229,26 @@ GameObject:
   - component: {fileID: 4094910827031923919}
   - component: {fileID: 1156712594767936086}
   - component: {fileID: 1995277481858344256}
+  - component: {fileID: 5074876049839916778}
   m_Layer: 0
-  m_Name: UsefulDoor
+  m_Name: CorrectDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5074876049839916778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074876049839916777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228e168a794e4349ba449df228892aa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5080988236915150025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6310,15 +6288,15 @@ RectTransform:
   m_GameObject: {fileID: 5883198403241027790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.010895233, y: 0.010895233, z: 0.010895233}
   m_Children: []
   m_Father: {fileID: 7184236521421745119}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 8, y: 9}
+  m_AnchoredPosition: {x: -0.0000071703, y: 0}
+  m_SizeDelta: {x: 601, y: 269}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5815549166059947116
 GameObject:
@@ -8262,7 +8240,7 @@ RectTransform:
   m_GameObject: {fileID: 4890878380064013296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.005701474, y: 0.005701474, z: 0.005701474}
   m_Children: []
   m_Father: {fileID: 4185910148361817601}
   m_RootOrder: 0
@@ -8270,7 +8248,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 6, y: 6}
+  m_SizeDelta: {x: 977, y: 1011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &8645155097007692004
 MeshRenderer:

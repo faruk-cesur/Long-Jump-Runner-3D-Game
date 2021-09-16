@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
 
     public PlayerController player;
 
-    public Slider distanceSlider;
+    public Slider distanceSlider, energySlider;
 
     public GameObject distanceFinish, particleCollectableGold;
 

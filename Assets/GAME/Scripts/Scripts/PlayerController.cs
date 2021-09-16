@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using NaughtyAttributes;
 using UnityEngine;
 
 
@@ -9,7 +10,10 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool finishCam;
 
-    [SerializeField] private float _runSpeed, _slideSpeed, _maxSlideAmount;
+    [SerializeField] private float _slideSpeed, _maxSlideAmount;
+
+    [MinValue(7)] [MaxValue(12)] [SerializeField]
+    private float _runSpeed;
 
     [SerializeField] private Transform _playerModel;
 
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour
                 AnimationController.Instance.IdleAnimation();
                 break;
             case GameState.MainGame:
+                PlayerSpeedAnimations();
                 ForwardMovement();
                 SwerveMovement();
                 break;
@@ -87,6 +92,24 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
+
+        CorrectDoor correctDoor = other.GetComponentInParent<CorrectDoor>();
+        if (correctDoor)
+        {
+            _runSpeed++;
+            UIManager.Instance.energySlider.value++;
+            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+        }
+
+        WrongDoor wrongDoor = other.GetComponentInParent<WrongDoor>();
+        if (wrongDoor)
+        {
+            _runSpeed--;
+            UIManager.Instance.energySlider.value--;
+            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+        }
     }
 
     #endregion
@@ -108,6 +131,22 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.CurrentGameState = GameState.LoseGame;
         _isPlayerDead = true;
         _isPlayerInteract = true;
+    }
+
+    private void PlayerSpeedAnimations()
+    {
+        if (_runSpeed <= 7)
+        {
+            AnimationController.Instance.WalkAnimation();
+        }
+        else if (_runSpeed >= 8 && _runSpeed <= 10)
+        {
+            AnimationController.Instance.SlowRunAnimation();
+        }
+        else if (_runSpeed >= 11)
+        {
+            AnimationController.Instance.RunAnimation();
+        }
     }
 
     #endregion

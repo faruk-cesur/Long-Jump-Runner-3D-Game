@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.MainGame;
         UIManager.Instance.MainGameUI();
-        AnimationController.Instance.RunAnimation();
+        AnimationController.Instance.WalkAnimation();
     }
 
     public void RestartGame()

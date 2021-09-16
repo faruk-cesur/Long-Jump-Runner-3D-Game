@@ -26,9 +26,27 @@ public class AnimationController : MonoBehaviour
         _animator.SetBool("Run", false);
     }
 
+    public void WalkAnimation()
+    {
+        _animator.SetBool("Idle", false);
+        _animator.SetBool("Walk", true);
+        _animator.SetBool("SlowRun", false);
+        _animator.SetBool("Run", false);
+    }
+    
+    public void SlowRunAnimation()
+    {
+        _animator.SetBool("Idle", false);
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("SlowRun", true);
+        _animator.SetBool("Run", false);
+    }
+    
     public void RunAnimation()
     {
         _animator.SetBool("Idle", false);
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("SlowRun", false);
         _animator.SetBool("Run", true);
     }
 
