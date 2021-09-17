@@ -102,24 +102,16 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
-
-        CorrectDoor correctDoor = other.GetComponentInParent<CorrectDoor>();
-        if (correctDoor)
-        {
-            _runSpeed++;
-            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
-        }
-
-        WrongDoor wrongDoor = other.GetComponentInParent<WrongDoor>();
-        if (wrongDoor)
-        {
-            _runSpeed--;
-            UIManager.Instance.energySlider.value--;
-            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
-        }
         
+        Obstacle obstacle = other.GetComponentInParent<Obstacle>();
+        if (obstacle)
+        {
+            _runSpeed -= 0.25f;
+            UIManager.Instance.energySlider.value -= 0.25f;
+            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+        }
+
         CollectShoesPanel collectShoesPanel = other.GetComponentInParent<CollectShoesPanel>();
         if (collectShoesPanel)
         {
