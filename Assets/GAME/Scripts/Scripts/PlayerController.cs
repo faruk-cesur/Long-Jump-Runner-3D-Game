@@ -92,12 +92,21 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
+        
+        CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
+        if (collectableShoes)
+        {
+            _runSpeed += 0.25f;
+            UIManager.Instance.energySlider.value += 0.25f;
+            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+            Destroy(other.gameObject);
+        }
 
         CorrectDoor correctDoor = other.GetComponentInParent<CorrectDoor>();
         if (correctDoor)
         {
             _runSpeed++;
-            UIManager.Instance.energySlider.value++;
             Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
         }
@@ -111,8 +120,8 @@ public class PlayerController : MonoBehaviour
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
         }
         
-        GoldCoinPanel goldCoinPanel = other.GetComponentInParent<GoldCoinPanel>();
-        if (goldCoinPanel)
+        CollectShoesPanel collectShoesPanel = other.GetComponentInParent<CollectShoesPanel>();
+        if (collectShoesPanel)
         {
             UIManager.Instance.goldCoinPanel.SetActive(false);
             UIManager.Instance.avoidObstaclesPanel.SetActive(true);
@@ -153,15 +162,15 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerSpeedAnimations()
     {
-        if (_runSpeed <= 7)
+        if (_runSpeed < 8.25f)
         {
             AnimationController.Instance.WalkAnimation();
         }
-        else if (_runSpeed >= 8 && _runSpeed <= 10)
+        else if (_runSpeed >= 8.25f && _runSpeed < 10)
         {
             AnimationController.Instance.SlowRunAnimation();
         }
-        else if (_runSpeed >= 11)
+        else if (_runSpeed >= 10)
         {
             AnimationController.Instance.RunAnimation();
         }
