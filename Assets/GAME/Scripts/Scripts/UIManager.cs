@@ -14,13 +14,13 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel,avoidObstaclesPanel,goldCoinPanel;
+    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel, avoidObstaclesPanel, goldCoinPanel;
 
-    public TextMeshProUGUI earnedGoldText, totalGoldText, sliderLevelText;
+    public TextMeshProUGUI currentGoldText, earnedGoldText, prepareTotalGoldText,winTotalGoldText, sliderLevelText;
 
     [HideInInspector] public int sliderLevel = 1, gold;
 
-    [SerializeField] private GameObject _prepareGameUI, _mainGameUI, _loseGameUI, _winGameUI;
+    [SerializeField] private GameObject _prepareGameUI, _mainGameUI, _loseGameUI, _winGameUI, _energySliderObject;
 
     private void Awake()
     {
@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.MainGame:
                 CalculateRoadDistance();
+                EqualCurrentGold();
                 break;
             case GameState.LoseGame:
                 break;
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
 
     public void PrepareGameUI()
     {
+        _energySliderObject.SetActive(false);
         _prepareGameUI.SetActive(true);
         _mainGameUI.SetActive(false);
         _loseGameUI.SetActive(false);
@@ -69,6 +71,7 @@ public class UIManager : MonoBehaviour
 
     public void MainGameUI()
     {
+        _energySliderObject.SetActive(true);
         _prepareGameUI.SetActive(false);
         _mainGameUI.SetActive(true);
         _loseGameUI.SetActive(false);
@@ -77,6 +80,7 @@ public class UIManager : MonoBehaviour
 
     public void LoseGameUI()
     {
+        _energySliderObject.SetActive(false);
         _prepareGameUI.SetActive(false);
         _mainGameUI.SetActive(false);
         _loseGameUI.SetActive(true);
@@ -85,6 +89,7 @@ public class UIManager : MonoBehaviour
 
     public void WinGameUI()
     {
+        _energySliderObject.SetActive(false);
         _prepareGameUI.SetActive(false);
         _mainGameUI.SetActive(false);
         _loseGameUI.SetActive(false);
@@ -102,10 +107,16 @@ public class UIManager : MonoBehaviour
         gold = 0;
     }
 
+    private void EqualCurrentGold()
+    {
+        currentGoldText.text = gold.ToString();
+    }
+
     public void UpdateGoldInfo()
     {
-        earnedGoldText.text = gold.ToString();
-        totalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
+        earnedGoldText.text = currentGoldText.text;
+        prepareTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
+        winTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
     }
 
     private void SetPlayerPrefs()
@@ -145,6 +156,6 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("SliderLevel", PlayerPrefs.GetInt("SliderLevel") + 1);
         sliderLevelText.text = PlayerPrefs.GetInt("SliderLevel").ToString();
-        //LevelManager.Instance.NextLevel();
+        LevelManager.Instance.NextLevel();
     }
 }
