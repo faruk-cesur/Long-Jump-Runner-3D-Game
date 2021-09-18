@@ -116,13 +116,16 @@ public class PlayerController : MonoBehaviour
         }
 
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
-        if (obstacle)
+        if (!_isPlayerInteract)
         {
-            runSpeed -= 0.25f;
-            UIManager.Instance.energySlider.value -= 0.25f;
-            Instantiate(UIManager.Instance.particleCollectableGold,
-                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+            if (obstacle)
+            {
+                StartCoroutine(PlayerInteractBool());
+                runSpeed--;
+                UIManager.Instance.energySlider.value--;
+                StartCoroutine(AnimationController.Instance.InjuredRun());
+                SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
+            }
         }
 
         CollectShoesPanel collectShoesPanel = other.GetComponentInParent<CollectShoesPanel>();

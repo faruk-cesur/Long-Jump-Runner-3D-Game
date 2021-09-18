@@ -50,12 +50,13 @@ public class AnimationController : MonoBehaviour
         _animator.SetBool("Run", true);
     }
 
-    public void InjuredRun()
+    public IEnumerator InjuredRun()
     {
         _animator.SetBool("InjuredRun", true);
-        _animator.SetBool("Walk", false);
-        _animator.SetBool("SlowRun", false);
-        _animator.SetBool("Run", false);
+
+        yield return new WaitForSeconds(2f);
+        
+        _animator.SetBool("InjuredRun", false);
     }
 
     public IEnumerator JumpAnimation()

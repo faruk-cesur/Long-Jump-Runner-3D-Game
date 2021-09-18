@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3122817327377678269}
   - component: {fileID: 6799589842435264229}
   - component: {fileID: 874465095019855582}
+  - component: {fileID: 864653782}
   m_Layer: 0
   m_Name: Obstacle-14.002
   m_TagString: Untagged
@@ -80,6 +81,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &864653782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946022364960868722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.19413933, y: 2.0950427, z: 1.589132}
+  m_Center: {x: 0, y: 0.9424946, z: 0}
 --- !u!1 &4975544661535881797
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 5119070784817147118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 6456787122653878487}
   - {fileID: 2274406167252185097}

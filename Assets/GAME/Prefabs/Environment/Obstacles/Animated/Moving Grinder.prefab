@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 2269080885023885647}
   - component: {fileID: 2686792126388075005}
   - component: {fileID: 4046626872435281110}
+  - component: {fileID: 4352305678069026599}
   m_Layer: 0
   m_Name: Obstacle-15.001
   m_TagString: Untagged
@@ -194,3 +195,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4352305678069026599
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583078540970330736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.45598477, y: 1.9125931, z: 0.45598477}
+  m_Center: {x: -0.000097565375, y: 0.96484435, z: -0.000006578864}

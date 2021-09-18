@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4703776791100903902}
   - component: {fileID: 6466085990086776316}
   - component: {fileID: 7269654766385860577}
+  - component: {fileID: 1950510920}
   m_Layer: 0
   m_Name: Obstacle-5.000
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1950510920
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100554794745512577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2417412, y: 0.8337523, z: 0.8337525}
+  m_Center: {x: 1.6209991, y: -0.00000013411045, z: 0}
 --- !u!1 &4285283824643990459
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +185,7 @@ GameObject:
   - component: {fileID: 3061245348330197438}
   - component: {fileID: 2835176333291699000}
   - component: {fileID: 5444158961333756591}
+  - component: {fileID: 6134113572235794485}
   m_Layer: 0
   m_Name: Obstacle-5.002
   m_TagString: Untagged
@@ -240,6 +255,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6134113572235794485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575818824445397133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1338878, y: 0.8337525, z: 0.8337525}
+  m_Center: {x: -1.5677178, y: -0.0000010728836, z: 0.001791209}
 --- !u!1 &6739488080238993025
 GameObject:
   m_ObjectHideFlags: 0

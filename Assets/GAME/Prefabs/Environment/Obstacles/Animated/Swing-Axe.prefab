@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 695865466142382156}
   - component: {fileID: 8360076341337994951}
   - component: {fileID: 4034877718075476435}
+  - component: {fileID: 9057182428871806363}
   m_Layer: 0
   m_Name: Obstacle 2.002
   m_TagString: Untagged
@@ -79,6 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &9057182428871806363
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785965727409908157}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7425971, y: 0.81308234, z: 0.19941501}
+  m_Center: {x: 0.00000023841858, y: -0.09719932, z: -0.000000007450538}
 --- !u!1 &3438957857848151155
 GameObject:
   m_ObjectHideFlags: 0
