@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    public AudioClip collectableSound, loseGameSound, winGameSound;
+    public AudioClip collectableSound, loseGameSound, winGameSound,hitHeadSound;
 
     private AudioSource _audioSource;
 

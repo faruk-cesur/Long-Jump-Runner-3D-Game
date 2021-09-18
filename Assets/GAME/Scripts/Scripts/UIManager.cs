@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel, avoidObstaclesPanel, goldCoinPanel, energySliderObject;
+    public GameObject distanceFinish, particleCollectableGold, avoidObstaclesPanel, goldCoinPanel, energySliderObject;
 
     public TextMeshProUGUI currentGoldText, earnedGoldText, prepareTotalGoldText,winTotalGoldText, sliderLevelText;
 
@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour
 
     public void LoseGameUI()
     {
-        _energySliderObject.SetActive(false);
         _prepareGameUI.SetActive(false);
         _mainGameUI.SetActive(false);
         _loseGameUI.SetActive(true);
@@ -142,7 +141,10 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator DurationLoseGameUI()
     {
-        yield return new WaitForSeconds(2f);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound,1f);
+        _energySliderObject.SetActive(false);
+        yield return new WaitForSeconds(3f);
+        SoundManager.Instance.LoseGameSound();
         LoseGameUI();
     }
 

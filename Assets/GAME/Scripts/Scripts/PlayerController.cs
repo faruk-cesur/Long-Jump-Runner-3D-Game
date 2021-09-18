@@ -136,13 +136,6 @@ public class PlayerController : MonoBehaviour
         if (avoidObstaclePanel)
         {
             UIManager.Instance.avoidObstaclesPanel.SetActive(false);
-            UIManager.Instance.pickObjectPanel.SetActive(true);
-        }
-
-        PickObjectPanel pickObjectPanel = other.GetComponentInParent<PickObjectPanel>();
-        if (pickObjectPanel)
-        {
-            UIManager.Instance.pickObjectPanel.SetActive(false);
         }
     }
 

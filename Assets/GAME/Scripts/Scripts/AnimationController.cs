@@ -49,6 +49,7 @@ public class AnimationController : MonoBehaviour
         _animator.SetBool("SlowRun", false);
         _animator.SetBool("Run", true);
     }
+
     public void InjuredRun()
     {
         _animator.SetBool("InjuredRun", true);
@@ -67,7 +68,7 @@ public class AnimationController : MonoBehaviour
         yield return new WaitForSeconds(0.833f);
         FallAnimation();
     }
-    
+
     public void FallAnimation()
     {
         _animator.SetBool("Jump", false);
@@ -88,6 +89,9 @@ public class AnimationController : MonoBehaviour
 
     public void DeathAnimation()
     {
+        _animator.applyRootMotion = true;
+        _animator.SetBool("Walk", false);
+        _animator.SetBool("SlowRun", false);
         _animator.SetBool("Run", false);
         _animator.SetBool("Death", true);
     }

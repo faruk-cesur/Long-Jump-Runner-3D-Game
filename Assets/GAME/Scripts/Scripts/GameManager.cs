@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         AnimationController.Instance.DeathAnimation();
-        SoundManager.Instance.LoseGameSound();
         CurrentGameState = GameState.LoseGame;
         StartCoroutine(UIManager.Instance.DurationLoseGameUI());
     }
