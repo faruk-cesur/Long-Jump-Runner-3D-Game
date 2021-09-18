@@ -71,11 +71,18 @@ public class GameManager : MonoBehaviour
 
     public void LoseGame()
     {
+        AnimationController.Instance.DeathAnimation();
+        SoundManager.Instance.LoseGameSound();
+        CurrentGameState = GameState.LoseGame;
         StartCoroutine(UIManager.Instance.DurationLoseGameUI());
     }
 
     public void WinGame()
     {
+        PlayerPrefs.SetInt("TotalGold", UIManager.Instance.gold + PlayerPrefs.GetInt("TotalGold"));
+        UIManager.Instance.UpdateGoldInfo();
+        UIManager.Instance.energySliderObject.SetActive(false);
+        CurrentGameState = GameState.WinGame;
         StartCoroutine(UIManager.Instance.DurationWinGameUI());
     }
 }

@@ -31,9 +31,15 @@ public class SoundManager : MonoBehaviour
         _audioSource.PlayOneShot(clip, volume);
     }
 
-    public IEnumerator LoseGameSound()
+    public void LoseGameSound()
     {
-        PlaySound(Instance.loseGameSound, 1);
-        yield return new WaitForSeconds(2f);
+        PlaySound(loseGameSound, 1);
+    }
+
+    public void WinGameSound()
+    {
+        _audioSource.clip = winGameSound;
+        _audioSource.loop = true;
+        _audioSource.Play();
     }
 }

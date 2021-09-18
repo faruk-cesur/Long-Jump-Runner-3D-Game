@@ -614,9 +614,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishCam: 0
+  runSpeed: 7.75
   _slideSpeed: 10
   _maxSlideAmount: 7.5
-  _runSpeed: 7.75
   _playerModel: {fileID: 1001228078462869411}
 --- !u!54 &993934508986891547
 Rigidbody:

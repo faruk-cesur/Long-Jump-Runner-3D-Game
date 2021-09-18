@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -10,15 +11,17 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool finishCam;
 
+    [HideInInspector] public float longJumpTime;
+
     [MinValue(7)] [MaxValue(12)] public float runSpeed;
 
     [SerializeField] private float _slideSpeed, _maxSlideAmount;
 
     [SerializeField] private Transform _playerModel;
 
-    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin;
+    private float _jumpValue, _jumpDuration;
 
-    [SerializeField] private float _longJumpTime;
+    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish;
 
     #endregion
 
@@ -33,6 +36,7 @@ public class PlayerController : MonoBehaviour
                 PlayerSpeedAnimations();
                 ForwardMovement();
                 SwerveMovement();
+                PlayerDeathControl();
                 break;
             case GameState.LoseGame:
                 break;
@@ -152,15 +156,13 @@ public class PlayerController : MonoBehaviour
         runSpeed = 10;
     }
 
-    private void PlayerDeath()
+    private void PlayerDeathControl()
     {
-        runSpeed = 0;
-        GameManager.Instance.LoseGame();
-        AnimationController.Instance.DeathAnimation();
-        StartCoroutine(SoundManager.Instance.LoseGameSound());
-        GameManager.Instance.CurrentGameState = GameState.LoseGame;
-        _isPlayerDead = true;
-        _isPlayerInteract = true;
+        if (UIManager.Instance.energySlider.value <= 7 && !_isPlayerDead)
+        {
+            _isPlayerDead = true;
+            GameManager.Instance.LoseGame();
+        }
     }
 
     private void PlayerSpeedAnimations()
@@ -183,27 +185,39 @@ public class PlayerController : MonoBehaviour
     {
         if (runSpeed < 8.25f)
         {
-            _longJumpTime = 1f;
+            longJumpTime = 1f;
+            _jumpValue = 2f;
+            _jumpDuration = 0.5f;
         }
         else if (runSpeed >= 8.25f && runSpeed < 9)
         {
-            _longJumpTime = 2f;
+            longJumpTime = 2f;
+            _jumpValue = 4f;
+            _jumpDuration = 1f;
         }
         else if (runSpeed >= 9 && runSpeed < 10)
         {
-            _longJumpTime = 3f;
+            longJumpTime = 3f;
+            _jumpValue = 6f;
+            _jumpDuration = 1.5f;
         }
         else if (runSpeed >= 10 && runSpeed < 10.75f)
         {
-            _longJumpTime = 4f;
+            longJumpTime = 4f;
+            _jumpValue = 8f;
+            _jumpDuration = 2f;
         }
         else if (runSpeed >= 10.75f && runSpeed < 11.75f)
         {
-            _longJumpTime = 5f;
+            longJumpTime = 5f;
+            _jumpValue = 10f;
+            _jumpDuration = 2.5f;
         }
         else if (runSpeed >= 11.75f)
         {
-            _longJumpTime = 6f;
+            longJumpTime = 6f;
+            _jumpValue = 10f;
+            _jumpDuration = 3f;
         }
     }
 
@@ -211,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
 
     #region Coroutines
-    
+
     private IEnumerator PlayerInteractBool()
     {
         _isPlayerInteract = true;
@@ -221,8 +235,29 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator PlayerWinBool()
     {
-        yield return new WaitForSeconds(_longJumpTime);
-        _isPlayerWin = true;
+        if (!_isGameFinish)
+        {
+            _isGameFinish = true;
+            _playerModel.DOMoveX(0, 1);
+            StartCoroutine(JumpingPositionY());
+            StartCoroutine(AnimationController.Instance.JumpAnimation());
+            yield return new WaitForSeconds(longJumpTime);
+            AnimationController.Instance.LandAnimation();
+            _isPlayerWin = true;
+            yield return new WaitForSeconds(1f);
+            Quaternion rot = new Quaternion();
+            rot.eulerAngles = new Vector3(0, -130, 0);
+            _playerModel.localRotation = rot;
+            AnimationController.Instance.WinAnimation();
+            SoundManager.Instance.WinGameSound();
+        }
+    }
+
+    private IEnumerator JumpingPositionY()
+    {
+        _playerModel.DOMoveY(_jumpValue, _jumpDuration);
+        yield return new WaitForSeconds(_jumpDuration);
+        _playerModel.DOMoveY(0, _jumpDuration);
     }
 
     #endregion

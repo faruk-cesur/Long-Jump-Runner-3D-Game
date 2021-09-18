@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel, avoidObstaclesPanel, goldCoinPanel;
+    public GameObject distanceFinish, particleCollectableGold, pickObjectPanel, avoidObstaclesPanel, goldCoinPanel, energySliderObject;
 
     public TextMeshProUGUI currentGoldText, earnedGoldText, prepareTotalGoldText,winTotalGoldText, sliderLevelText;
 
@@ -136,7 +136,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator DurationWinGameUI()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(player.longJumpTime+ 2f);
         WinGameUI();
     }
 
