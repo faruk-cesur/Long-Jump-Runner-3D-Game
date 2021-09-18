@@ -19,6 +19,7 @@ public class Finish : MonoBehaviour
         PlayerController playerController = other.GetComponentInParent<PlayerController>();
         if (playerController)
         {
+            playerController.LongJumpCalculate();
             playerController.finishCam = true;
             playerController.PlayerSpeedDown();
             PlayerPrefs.SetInt("TotalGold", UIManager.Instance.gold + PlayerPrefs.GetInt("TotalGold"));

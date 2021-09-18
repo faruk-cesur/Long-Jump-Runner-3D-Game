@@ -10,14 +10,15 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool finishCam;
 
-    [SerializeField] private float _slideSpeed, _maxSlideAmount;
+    [MinValue(7)] [MaxValue(12)] public float runSpeed;
 
-    [MinValue(7)] [MaxValue(12)] [SerializeField]
-    private float _runSpeed;
+    [SerializeField] private float _slideSpeed, _maxSlideAmount;
 
     [SerializeField] private Transform _playerModel;
 
-    private bool _isPlayerInteract, _isPlayerDead;
+    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin;
+
+    [SerializeField] private float _longJumpTime;
 
     #endregion
 
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
             case GameState.LoseGame:
                 break;
             case GameState.WinGame:
+                ForwardMovement();
+                StartCoroutine(PlayerWinBool());
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -46,7 +49,10 @@ public class PlayerController : MonoBehaviour
 
     private void ForwardMovement()
     {
-        transform.Translate(Vector3.forward * _runSpeed * Time.deltaTime);
+        if (!_isPlayerWin)
+        {
+            transform.Translate(Vector3.forward * runSpeed * Time.deltaTime);
+        }
     }
 
     private float _mousePosX;
@@ -88,27 +94,30 @@ public class PlayerController : MonoBehaviour
         if (collectableGold)
         {
             UIManager.Instance.gold++;
-            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            Instantiate(UIManager.Instance.particleCollectableGold,
+                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
-        
+
         CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
         if (collectableShoes)
         {
-            _runSpeed += 0.25f;
+            runSpeed += 0.25f;
             UIManager.Instance.energySlider.value += 0.25f;
-            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            Instantiate(UIManager.Instance.particleCollectableGold,
+                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
             Destroy(other.gameObject);
         }
-        
+
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
         if (obstacle)
         {
-            _runSpeed -= 0.25f;
+            runSpeed -= 0.25f;
             UIManager.Instance.energySlider.value -= 0.25f;
-            Instantiate(UIManager.Instance.particleCollectableGold, _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            Instantiate(UIManager.Instance.particleCollectableGold,
+                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
         }
 
@@ -118,12 +127,14 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.goldCoinPanel.SetActive(false);
             UIManager.Instance.avoidObstaclesPanel.SetActive(true);
         }
+
         AvoidObstaclePanel avoidObstaclePanel = other.GetComponentInParent<AvoidObstaclePanel>();
         if (avoidObstaclePanel)
         {
             UIManager.Instance.avoidObstaclesPanel.SetActive(false);
             UIManager.Instance.pickObjectPanel.SetActive(true);
         }
+
         PickObjectPanel pickObjectPanel = other.GetComponentInParent<PickObjectPanel>();
         if (pickObjectPanel)
         {
@@ -138,12 +149,12 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerSpeedDown()
     {
-        StartCoroutine(FinishGame());
+        runSpeed = 10;
     }
 
     private void PlayerDeath()
     {
-        _runSpeed = 0;
+        runSpeed = 0;
         GameManager.Instance.LoseGame();
         AnimationController.Instance.DeathAnimation();
         StartCoroutine(SoundManager.Instance.LoseGameSound());
@@ -154,17 +165,45 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerSpeedAnimations()
     {
-        if (_runSpeed < 8.25f)
+        if (runSpeed < 8.25f)
         {
             AnimationController.Instance.WalkAnimation();
         }
-        else if (_runSpeed >= 8.25f && _runSpeed < 10)
+        else if (runSpeed >= 8.25f && runSpeed < 10)
         {
             AnimationController.Instance.SlowRunAnimation();
         }
-        else if (_runSpeed >= 10)
+        else if (runSpeed >= 10)
         {
             AnimationController.Instance.RunAnimation();
+        }
+    }
+
+    public void LongJumpCalculate()
+    {
+        if (runSpeed < 8.25f)
+        {
+            _longJumpTime = 1f;
+        }
+        else if (runSpeed >= 8.25f && runSpeed < 9)
+        {
+            _longJumpTime = 2f;
+        }
+        else if (runSpeed >= 9 && runSpeed < 10)
+        {
+            _longJumpTime = 3f;
+        }
+        else if (runSpeed >= 10 && runSpeed < 10.75f)
+        {
+            _longJumpTime = 4f;
+        }
+        else if (runSpeed >= 10.75f && runSpeed < 11.75f)
+        {
+            _longJumpTime = 5f;
+        }
+        else if (runSpeed >= 11.75f)
+        {
+            _longJumpTime = 6f;
         }
     }
 
@@ -172,30 +211,18 @@ public class PlayerController : MonoBehaviour
 
 
     #region Coroutines
-
-    private IEnumerator FinishGame()
-    {
-        float timer = 0;
-        float fixSpeed = _runSpeed;
-        while (true)
-        {
-            timer += Time.deltaTime;
-            _runSpeed = Mathf.Lerp(fixSpeed, 0, timer);
-
-            if (timer >= 1f)
-            {
-                break;
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
-    }
-
+    
     private IEnumerator PlayerInteractBool()
     {
         _isPlayerInteract = true;
         yield return new WaitForSeconds(1f);
         _isPlayerInteract = false;
+    }
+
+    private IEnumerator PlayerWinBool()
+    {
+        yield return new WaitForSeconds(_longJumpTime);
+        _isPlayerWin = true;
     }
 
     #endregion
