@@ -5904,7 +5904,7 @@ PrefabInstance:
     - target: {fileID: 2418815394099209117, guid: 703b3d19bec5d3a488c04ee354498559,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3087933762776332583, guid: 703b3d19bec5d3a488c04ee354498559,
         type: 3}
@@ -7188,6 +7188,7 @@ MonoBehaviour:
   hitHeadSound: {fileID: 8300000, guid: dd7cea5896c6be848816c7f9d5812085, type: 3}
   collectShoesSound: {fileID: 8300000, guid: adf8aba07ca238c41ab69d40c3eb822a, type: 3}
   windWalkSound: {fileID: 8300000, guid: ca00e9c11ab1c5d42b655f3f5f4d864f, type: 3}
+  beforeJumpSound: {fileID: 8300000, guid: 297680f4e303f894ea29250bbc6137fc, type: 3}
 --- !u!82 &1900099014
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10203,7 +10204,7 @@ PrefabInstance:
     - target: {fileID: 8692508052356593385, guid: e072c4ed8144e41478848bca0942fb1c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 500
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8692508052356593385, guid: e072c4ed8144e41478848bca0942fb1c,
         type: 3}
@@ -10302,6 +10303,7 @@ MonoBehaviour:
   energySliderObject: {fileID: 13011116967949557}
   speedUpUI: {fileID: 1667937383}
   speedDownUI: {fileID: 1551099045}
+  confettiParticle: {fileID: 155770, guid: 039f0809d882b7f44ac9a410a3f7fa26, type: 3}
   currentGoldText: {fileID: 1179763416}
   earnedGoldText: {fileID: 6870013699264063134}
   earnedGoldBonusText: {fileID: 1217286378}
@@ -12224,7 +12226,7 @@ PrefabInstance:
     - target: {fileID: 606489664766075301, guid: dee2899d3dc836c4db70befceb91da5e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 510
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 606489664766075301, guid: dee2899d3dc836c4db70befceb91da5e,
         type: 3}

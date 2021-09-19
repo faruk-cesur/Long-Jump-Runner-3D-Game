@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
         }
 
         CurrentGameState = GameState.PrepareGame;
+        Taptic.tapticOn = true;
     }
 
     public void StartGame()
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
         AnimationController.Instance.DeathAnimation();
         CurrentGameState = GameState.LoseGame;
         StartCoroutine(UIManager.Instance.DurationLoseGameUI());
+        Taptic.Failure();
     }
 
     public void WinGame()

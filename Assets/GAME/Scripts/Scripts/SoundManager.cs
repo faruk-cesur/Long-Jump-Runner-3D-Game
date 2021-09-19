@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    public AudioClip collectGoldSound, loseGameSound, winGameSound, hitHeadSound, collectShoesSound, windWalkSound;
+    public AudioClip collectGoldSound, loseGameSound, winGameSound, hitHeadSound, collectShoesSound, windWalkSound, beforeJumpSound;
 
     private AudioSource _audioSource;
 
@@ -43,10 +43,16 @@ public class SoundManager : MonoBehaviour
         _audioSource.Play();
     }
 
-    public void WindWalkSound()
+    public void WindWalkSoundPlay()
     {
         _audioSource.clip = windWalkSound;
         _audioSource.loop = true;
         _audioSource.Play();
+    }
+    public void WindWalkSoundStop()
+    {
+        _audioSource.clip = windWalkSound;
+        _audioSource.loop = true;
+        _audioSource.Stop();
     }
 }

@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
                 _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
+            Taptic.Light();
         }
 
         CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SpeedUpParticle());
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectShoesSound, 1f);
             Destroy(other.gameObject);
+            Taptic.Medium();
         }
 
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
@@ -125,6 +127,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(SpeedDownParticle());
                 StartCoroutine(AnimationController.Instance.InjuredRun());
                 SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
+                Taptic.Heavy();
             }
         }
 
@@ -149,7 +152,8 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerSpeedDown()
     {
-        runSpeed = 10;
+        runSpeed = 10f;
+        UIManager.Instance.energySlider.value = 10f;
     }
 
     private void PlayerDeathControl()
@@ -167,11 +171,13 @@ public class PlayerController : MonoBehaviour
         {
             AnimationController.Instance.WalkAnimation();
             _isWindWalkActive = false;
+            SoundManager.Instance.WindWalkSoundStop();
         }
         else if (runSpeed >= 8.25f && runSpeed < 10)
         {
             AnimationController.Instance.SlowRunAnimation();
             _isWindWalkActive = false;
+            SoundManager.Instance.WindWalkSoundStop();
         }
         else if (runSpeed >= 10)
         {
@@ -179,7 +185,7 @@ public class PlayerController : MonoBehaviour
             if (!_isWindWalkActive)
             {
                 _isWindWalkActive = true;
-                SoundManager.Instance.WindWalkSound();
+                SoundManager.Instance.WindWalkSoundPlay();
             }
         }
     }
@@ -241,6 +247,9 @@ public class PlayerController : MonoBehaviour
         if (!_isGameFinish)
         {
             _isGameFinish = true;
+            Taptic.Warning();
+            SoundManager.Instance.WindWalkSoundStop();
+            SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound,1f);
             _playerModel.DOMoveX(0, 1);
             StartCoroutine(JumpingPositionY());
             StartCoroutine(AnimationController.Instance.JumpAnimation());
@@ -253,6 +262,8 @@ public class PlayerController : MonoBehaviour
             _playerModel.localRotation = rot;
             AnimationController.Instance.WinAnimation();
             SoundManager.Instance.WinGameSound();
+            Instantiate(UIManager.Instance.confettiParticle, _playerModel.transform.position + new Vector3(0,5,0), Quaternion.identity);
+            Taptic.Success();
         }
     }
 
