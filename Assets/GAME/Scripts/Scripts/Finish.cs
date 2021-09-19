@@ -28,32 +28,31 @@ public class Finish : MonoBehaviour
         if (!_isJump && _player.transform.position.z < transform.position.z + 15.01f && _player.transform.position.z > transform.position.z + 4.99f)
         {
             _isJump = true;
-            Debug.Log("X1");
         }
         else if (!_isJump && _player.transform.position.z < transform.position.z + 25.01f && _player.transform.position.z > transform.position.z + 14.99f)
         {
             _isJump = true;
-            Debug.Log("X2");
+            UIManager.Instance.gold *= 2;
         }
         else if (!_isJump && _player.transform.position.z < transform.position.z + 35.01f && _player.transform.position.z > transform.position.z + 24.99f)
         {
             _isJump = true;
-            Debug.Log("X4");
+            UIManager.Instance.gold *= 4;
         }
         else if (!_isJump && _player.transform.position.z < transform.position.z + 45.01f && _player.transform.position.z > transform.position.z + 34.99f)
         {
             _isJump = true;
-            Debug.Log("X6");
+            UIManager.Instance.gold *= 6;
         }
         else if (!_isJump && _player.transform.position.z < transform.position.z + 55.01f && _player.transform.position.z > transform.position.z + 44.99f)
         {
             _isJump = true;
-            Debug.Log("X8");
+            UIManager.Instance.gold *= 8;
         }
         else if (!_isJump && _player.transform.position.z < transform.position.z + 65.01f && _player.transform.position.z > transform.position.z + 54.99f)
         {
             _isJump = true;
-            Debug.Log("X10");
+            UIManager.Instance.gold *= 10;
         }
     }
 }

@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.MainGame:
                 CalculateRoadDistance();
-                EqualCurrentGold();
+                UpdateGoldInfo();
                 break;
             case GameState.LoseGame:
                 break;
@@ -128,15 +128,11 @@ public class UIManager : MonoBehaviour
     {
         gold = 0;
     }
-
-    private void EqualCurrentGold()
-    {
-        currentGoldText.text = gold.ToString();
-    }
-
+    
     public void UpdateGoldInfo()
     {
         CalculateBonusArrowRotation();
+        currentGoldText.text = gold.ToString();
         earnedGoldText.text = currentGoldText.text;
         prepareTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
         winTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
