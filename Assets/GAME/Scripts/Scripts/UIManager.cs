@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,11 +18,31 @@ public class UIManager : MonoBehaviour
 
     public GameObject distanceFinish, particleCollectableGold, avoidObstaclesPanel, goldCoinPanel, energySliderObject;
 
-    public TextMeshProUGUI currentGoldText, earnedGoldText, prepareTotalGoldText,winTotalGoldText, sliderLevelText;
+    public TextMeshProUGUI currentGoldText,
+        earnedGoldText,
+        earnedGoldBonusText,
+        getGoldBonusXText,
+        prepareTotalGoldText,
+        winTotalGoldText,
+        sliderLevelText;
 
     [HideInInspector] public int sliderLevel = 1, gold;
 
-    [SerializeField] private GameObject _prepareGameUI, _mainGameUI, _loseGameUI, _winGameUI, _energySliderObject;
+    [SerializeField] private GameObject _prepareGameUI,
+        _mainGameUI,
+        _loseGameUI,
+        _winGameUI,
+        _energySliderObject,
+        _bonusPointArrow,
+        _getGoldButton,
+        _getBonusGoldButton,
+        _bonusXArrow;
+
+    [SerializeField] private List<GameObject> _goldenCoins;
+
+    private bool _isBonusPointSelected;
+
+    private float _anglerBonusArrowZ, _time = 1f;
 
     private void Awake()
     {
@@ -55,6 +77,7 @@ public class UIManager : MonoBehaviour
             case GameState.LoseGame:
                 break;
             case GameState.WinGame:
+                CalculateRoadDistance();
                 UpdateGoldInfo();
                 break;
         }
@@ -113,6 +136,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGoldInfo()
     {
+        CalculateBonusArrowRotation();
         earnedGoldText.text = currentGoldText.text;
         prepareTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
         winTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
@@ -135,13 +159,13 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator DurationWinGameUI()
     {
-        yield return new WaitForSeconds(player.longJumpTime+ 2f);
+        yield return new WaitForSeconds(player.longJumpTime + 2f);
         WinGameUI();
     }
 
     public IEnumerator DurationLoseGameUI()
     {
-        SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound,1f);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
         _energySliderObject.SetActive(false);
         yield return new WaitForSeconds(3f);
         SoundManager.Instance.LoseGameSound();
@@ -159,5 +183,85 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("SliderLevel", PlayerPrefs.GetInt("SliderLevel") + 1);
         sliderLevelText.text = PlayerPrefs.GetInt("SliderLevel").ToString();
         LevelManager.Instance.NextLevel();
+    }
+
+    public void GetBonusGoldXButton()
+    {
+        foreach (var goldenCoin in _goldenCoins)
+        {
+            goldenCoin.SetActive(true);
+            goldenCoin.transform.DOLocalMove(new Vector3(431, 927, 0), _time);
+            _time += 0.05f;
+        }
+        
+        if (_anglerBonusArrowZ <= 0 && _anglerBonusArrowZ >= -54f)
+        {
+            PlayerPrefs.SetInt("TotalGold", gold * 2 + PlayerPrefs.GetInt("TotalGold"));
+        }
+
+        if (_anglerBonusArrowZ < -54f && _anglerBonusArrowZ >= -110f)
+        {
+            PlayerPrefs.SetInt("TotalGold", gold * 3 + PlayerPrefs.GetInt("TotalGold"));
+        }
+
+        if (_anglerBonusArrowZ < -110f && _anglerBonusArrowZ >= -158f)
+        {
+            PlayerPrefs.SetInt("TotalGold", gold * 4 + PlayerPrefs.GetInt("TotalGold"));
+        }
+
+        if (_anglerBonusArrowZ < -158f && _anglerBonusArrowZ >= -180f)
+        {
+            PlayerPrefs.SetInt("TotalGold", gold * 5 + PlayerPrefs.GetInt("TotalGold"));
+        }
+        
+        _getGoldButton.SetActive(false);
+        _getBonusGoldButton.SetActive(false);
+        _bonusXArrow.SetActive(false);
+        NextLevelButton();
+    }
+
+    public void GetGoldButton()
+    {
+        foreach (var goldenCoin in _goldenCoins)
+        {
+            goldenCoin.SetActive(true);
+            goldenCoin.transform.DOLocalMove(new Vector3(431, 927, 0), _time);
+            _time += 0.05f;
+        }
+
+        PlayerPrefs.SetInt("TotalGold", gold + PlayerPrefs.GetInt("TotalGold"));
+        _getGoldButton.SetActive(false);
+        _getBonusGoldButton.SetActive(false);
+        _bonusXArrow.SetActive(false);
+        NextLevelButton();
+    }
+
+    private void CalculateBonusArrowRotation()
+    {
+        var anglerZ = UnityEditor.TransformUtils.GetInspectorRotation(_bonusPointArrow.transform).z;
+        _anglerBonusArrowZ = anglerZ;
+        if (anglerZ <= 0 && anglerZ >= -54f)
+        {
+            earnedGoldBonusText.text = (gold * 2).ToString();
+            getGoldBonusXText.text = "GET X2";
+        }
+
+        if (anglerZ < -54f && anglerZ >= -110f)
+        {
+            earnedGoldBonusText.text = (gold * 3).ToString();
+            getGoldBonusXText.text = "GET X3";
+        }
+
+        if (anglerZ < -110f && anglerZ >= -158f)
+        {
+            earnedGoldBonusText.text = (gold * 4).ToString();
+            getGoldBonusXText.text = "GET X4";
+        }
+
+        if (anglerZ < -158f && anglerZ >= -180f)
+        {
+            earnedGoldBonusText.text = (gold * 5).ToString();
+            getGoldBonusXText.text = "GET X5";
+        }
     }
 }

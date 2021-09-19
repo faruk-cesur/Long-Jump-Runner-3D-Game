@@ -614,6 +614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finishCam: 0
+  longJumpTime: 0
   runSpeed: 7.75
   _slideSpeed: 10
   _maxSlideAmount: 7.5

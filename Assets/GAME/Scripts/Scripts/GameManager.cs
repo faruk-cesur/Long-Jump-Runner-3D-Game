@@ -78,7 +78,6 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        PlayerPrefs.SetInt("TotalGold", UIManager.Instance.gold + PlayerPrefs.GetInt("TotalGold"));
         UIManager.Instance.UpdateGoldInfo();
         UIManager.Instance.energySliderObject.SetActive(false);
         CurrentGameState = GameState.WinGame;
