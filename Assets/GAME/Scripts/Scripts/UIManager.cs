@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold, avoidObstaclesPanel, goldCoinPanel, energySliderObject;
+    public GameObject distanceFinish, particleCollectableGold, avoidObstaclesPanel, goldCoinPanel, energySliderObject,speedUpUI, speedDownUI;
 
     public TextMeshProUGUI currentGoldText,
         earnedGoldText,
@@ -186,7 +186,7 @@ public class UIManager : MonoBehaviour
         foreach (var goldenCoin in _goldenCoins)
         {
             goldenCoin.SetActive(true);
-            goldenCoin.transform.DOLocalMove(new Vector3(431, 927, 0), _time);
+            goldenCoin.transform.DOLocalMove(new Vector3(38.7f, -50f, 0), _time);
             _time += 0.05f;
         }
         
@@ -221,7 +221,7 @@ public class UIManager : MonoBehaviour
         foreach (var goldenCoin in _goldenCoins)
         {
             goldenCoin.SetActive(true);
-            goldenCoin.transform.DOLocalMove(new Vector3(431, 927, 0), _time);
+            goldenCoin.transform.DOLocalMove(new Vector3(38.7f, -50f, 0), _time);
             _time += 0.05f;
         }
 

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpValue, _jumpDuration;
 
-    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish;
+    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive;
 
     #endregion
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
                 AnimationController.Instance.IdleAnimation();
                 break;
             case GameState.MainGame:
-                PlayerSpeedAnimations();
+                PlayerSpeedCalculate();
                 ForwardMovement();
                 SwerveMovement();
                 PlayerDeathControl();
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.gold++;
             Instantiate(UIManager.Instance.particleCollectableGold,
                 _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
         }
 
@@ -109,9 +109,8 @@ public class PlayerController : MonoBehaviour
         {
             runSpeed += 0.25f;
             UIManager.Instance.energySlider.value += 0.25f;
-            Instantiate(UIManager.Instance.particleCollectableGold,
-                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectableSound, 1f);
+            StartCoroutine(SpeedUpParticle());
+            SoundManager.Instance.PlaySound(SoundManager.Instance.collectShoesSound, 1f);
             Destroy(other.gameObject);
         }
 
@@ -123,6 +122,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(PlayerInteractBool());
                 runSpeed--;
                 UIManager.Instance.energySlider.value--;
+                StartCoroutine(SpeedDownParticle());
                 StartCoroutine(AnimationController.Instance.InjuredRun());
                 SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
             }
@@ -161,19 +161,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PlayerSpeedAnimations()
+    private void PlayerSpeedCalculate()
     {
         if (runSpeed < 8.25f)
         {
             AnimationController.Instance.WalkAnimation();
+            _isWindWalkActive = false;
         }
         else if (runSpeed >= 8.25f && runSpeed < 10)
         {
             AnimationController.Instance.SlowRunAnimation();
+            _isWindWalkActive = false;
         }
         else if (runSpeed >= 10)
         {
             AnimationController.Instance.RunAnimation();
+            if (!_isWindWalkActive)
+            {
+                _isWindWalkActive = true;
+                SoundManager.Instance.WindWalkSound();
+            }
         }
     }
 
@@ -254,6 +261,23 @@ public class PlayerController : MonoBehaviour
         _playerModel.DOMoveY(_jumpValue, _jumpDuration);
         yield return new WaitForSeconds(_jumpDuration);
         _playerModel.DOMoveY(0, _jumpDuration);
+    }
+    private IEnumerator SpeedUpParticle()
+    {
+        UIManager.Instance.speedUpUI.SetActive(true);
+        UIManager.Instance.speedUpUI.transform.DOMoveY(6, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        UIManager.Instance.speedUpUI.transform.DOMoveY(3, 0.01f);
+        UIManager.Instance.speedUpUI.SetActive(false);
+    }
+    
+    private IEnumerator SpeedDownParticle()
+    {
+        UIManager.Instance.speedDownUI.SetActive(true);
+        UIManager.Instance.speedDownUI.transform.DOMoveY(6, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        UIManager.Instance.speedDownUI.transform.DOMoveY(3, 0.01f);
+        UIManager.Instance.speedDownUI.SetActive(false);
     }
 
     #endregion
