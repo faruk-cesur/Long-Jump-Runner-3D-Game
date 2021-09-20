@@ -164,7 +164,7 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
         _energySliderObject.SetActive(false);
         yield return new WaitForSeconds(3f);
-        SoundManager.Instance.LoseGameSound();
+        SoundManager.Instance.PlaySound(SoundManager.Instance.loseGameSound,1f);
         LoseGameUI();
     }
 

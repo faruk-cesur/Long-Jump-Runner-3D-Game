@@ -30,12 +30,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioSource.PlayOneShot(clip, volume);
     }
-
-    public void LoseGameSound()
-    {
-        PlaySound(loseGameSound, 1);
-    }
-
+    
     public void WinGameSound()
     {
         _audioSource.clip = winGameSound;
@@ -51,8 +46,9 @@ public class SoundManager : MonoBehaviour
     }
     public void WindWalkSoundStop()
     {
-        _audioSource.clip = windWalkSound;
-        _audioSource.loop = true;
-        _audioSource.Stop();
+        if (_audioSource.clip == windWalkSound)
+        {
+            _audioSource.clip = null;
+        }
     }
 }
