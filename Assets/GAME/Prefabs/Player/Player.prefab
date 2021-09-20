@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1551099046
 RectTransform:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1667937384
 RectTransform:
   m_ObjectHideFlags: 0
@@ -885,6 +885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finishCam: 0
   longJumpTime: 0
+  shoesSpeedUp: 0.25
+  obstacleDamage: 0
   runSpeed: 7.75
   _slideSpeed: 10
   _maxSlideAmount: 7.5

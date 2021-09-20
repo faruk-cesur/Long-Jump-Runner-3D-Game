@@ -58,6 +58,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        //PlayerPrefs.DeleteAll();
         SetGoldZeroOnStart();
         SetPlayerPrefs();
     }

@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
         }
 
         CurrentGameState = GameState.PrepareGame;
-        Taptic.tapticOn = true;
     }
 
     public void StartGame()

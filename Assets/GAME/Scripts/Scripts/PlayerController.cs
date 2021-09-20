@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public bool finishCam;
 
-    [HideInInspector] public float longJumpTime;
+    [HideInInspector] public float longJumpTime, shoesSpeedUp = 0.25f, obstacleDamage = 1f;
 
     [MinValue(7)] [MaxValue(12)] public float runSpeed;
 
@@ -102,18 +102,18 @@ public class PlayerController : MonoBehaviour
                 _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
-            Taptic.Light();
+            //Taptic.Light();
         }
 
         CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
         if (collectableShoes)
         {
-            runSpeed += 0.25f;
-            UIManager.Instance.energySlider.value += 0.25f;
+            runSpeed += shoesSpeedUp;
+            UIManager.Instance.energySlider.value += shoesSpeedUp;
             StartCoroutine(SpeedUpParticle());
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectShoesSound, 1f);
             Destroy(other.gameObject);
-            Taptic.Medium();
+            //Taptic.Medium();
         }
 
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
@@ -122,12 +122,12 @@ public class PlayerController : MonoBehaviour
             if (obstacle)
             {
                 StartCoroutine(PlayerInteractBool());
-                runSpeed--;
-                UIManager.Instance.energySlider.value--;
+                runSpeed -= obstacleDamage;
+                UIManager.Instance.energySlider.value -= obstacleDamage;
                 StartCoroutine(SpeedDownParticle());
                 StartCoroutine(AnimationController.Instance.InjuredRun());
                 SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
-                Taptic.Heavy();
+                //Taptic.Heavy();
             }
         }
 
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour
         if (!_isGameFinish)
         {
             _isGameFinish = true;
-            Taptic.Warning();
+            //Taptic.Warning();
             SoundManager.Instance.WindWalkSoundStop();
             SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound,1f);
             _playerModel.DOMoveX(0, 1);
@@ -263,7 +263,7 @@ public class PlayerController : MonoBehaviour
             AnimationController.Instance.WinAnimation();
             SoundManager.Instance.WinGameSound();
             Instantiate(UIManager.Instance.confettiParticle, _playerModel.transform.position + new Vector3(0,5,0), Quaternion.identity);
-            Taptic.Success();
+            //Taptic.Success();
         }
     }
 

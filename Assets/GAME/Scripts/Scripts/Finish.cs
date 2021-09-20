@@ -14,8 +14,8 @@ public class Finish : MonoBehaviour
         PlayerController playerController = other.GetComponentInParent<PlayerController>();
         if (playerController)
         {
-            playerController.PlayerSpeedDown();
             playerController.LongJumpCalculate();
+            playerController.PlayerSpeedDown();
             playerController.finishCam = true;
             Invoke("WinMiniGame",playerController.longJumpTime);
             GameManager.Instance.WinGame();

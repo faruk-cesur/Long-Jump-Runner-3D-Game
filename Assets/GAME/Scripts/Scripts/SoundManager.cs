@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip collectGoldSound, loseGameSound, winGameSound, hitHeadSound, collectShoesSound, windWalkSound, beforeJumpSound;
 
-    private AudioSource _audioSource;
+    [HideInInspector] public AudioSource audioSource;
 
 
     private void Awake()
@@ -22,33 +22,33 @@ public class SoundManager : MonoBehaviour
             Destroy(this);
         }
 
-        _audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
     public void PlaySound(AudioClip clip, float volume)
     {
-        _audioSource.PlayOneShot(clip, volume);
+        audioSource.PlayOneShot(clip, volume);
     }
     
     public void WinGameSound()
     {
-        _audioSource.clip = winGameSound;
-        _audioSource.loop = true;
-        _audioSource.Play();
+        audioSource.clip = winGameSound;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     public void WindWalkSoundPlay()
     {
-        _audioSource.clip = windWalkSound;
-        _audioSource.loop = true;
-        _audioSource.Play();
+        audioSource.clip = windWalkSound;
+        audioSource.loop = true;
+        audioSource.Play();
     }
     public void WindWalkSoundStop()
     {
-        if (_audioSource.clip == windWalkSound)
+        if (audioSource.clip == windWalkSound)
         {
-            _audioSource.clip = null;
+            audioSource.clip = null;
         }
     }
 }
