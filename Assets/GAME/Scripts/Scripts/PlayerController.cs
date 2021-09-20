@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _slideSpeed, _maxSlideAmount;
 
-    [SerializeField] private Transform _playerModel;
+    [SerializeField] private Transform _playerVisual, _playerModel;
 
     private float _jumpValue, _jumpDuration;
 
-    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive;
+    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive, _isGameStarted;
 
     #endregion
 
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
                 AnimationController.Instance.IdleAnimation();
                 break;
             case GameState.MainGame:
+                PlayerResetPositionOnStart();
                 PlayerSpeedCalculate();
                 ForwardMovement();
                 SwerveMovement();
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _playerVisualPosX = _playerModel.localPosition.x;
+                _playerVisualPosX = _playerVisual.localPosition.x;
                 _mousePosX = CameraManager.Cam.ScreenToViewportPoint(Input.mousePosition).x;
             }
 
@@ -77,13 +78,13 @@ public class PlayerController : MonoBehaviour
                 float currentMousePosX = CameraManager.Cam.ScreenToViewportPoint(Input.mousePosition).x;
                 float distance = currentMousePosX - _mousePosX;
                 float posX = _playerVisualPosX + (distance * _slideSpeed);
-                Vector3 pos = _playerModel.localPosition;
+                Vector3 pos = _playerVisual.localPosition;
                 pos.x = Mathf.Clamp(posX, -_maxSlideAmount, _maxSlideAmount);
-                _playerModel.localPosition = pos;
+                _playerVisual.localPosition = pos;
             }
             else
             {
-                Vector3 pos = _playerModel.localPosition;
+                Vector3 pos = _playerVisual.localPosition;
             }
         }
     }
@@ -99,7 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             UIManager.Instance.gold++;
             Instantiate(UIManager.Instance.particleCollectableGold,
-                _playerModel.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+                _playerVisual.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
             //Taptic.Light();
@@ -161,6 +162,7 @@ public class PlayerController : MonoBehaviour
         if (UIManager.Instance.energySlider.value <= 7 && !_isPlayerDead)
         {
             _isPlayerDead = true;
+            GetComponentInChildren<Collider>().enabled = false;
             GameManager.Instance.LoseGame();
         }
     }
@@ -230,6 +232,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void PlayerResetPositionOnStart()
+    {
+        if (!_isGameStarted)
+        {
+            _isGameStarted = true;
+            _playerModel.transform.position = new Vector3(0, 0, 3);
+            _playerModel.transform.rotation = Quaternion.identity;
+        }
+    }
+
     #endregion
 
 
@@ -250,7 +262,7 @@ public class PlayerController : MonoBehaviour
             //Taptic.Warning();
             SoundManager.Instance.WindWalkSoundStop();
             SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound,1f);
-            _playerModel.DOMoveX(0, 1);
+            _playerVisual.DOMoveX(0, 1);
             StartCoroutine(JumpingPositionY());
             StartCoroutine(AnimationController.Instance.JumpAnimation());
             yield return new WaitForSeconds(longJumpTime);
@@ -259,19 +271,19 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Quaternion rot = new Quaternion();
             rot.eulerAngles = new Vector3(0, -130, 0);
-            _playerModel.localRotation = rot;
+            _playerVisual.localRotation = rot;
             AnimationController.Instance.WinAnimation();
             SoundManager.Instance.WinGameSound();
-            Instantiate(UIManager.Instance.confettiParticle, _playerModel.transform.position + new Vector3(0,5,0), Quaternion.identity);
+            Instantiate(UIManager.Instance.confettiParticle, _playerVisual.transform.position + new Vector3(0,5,0), Quaternion.identity);
             //Taptic.Success();
         }
     }
 
     private IEnumerator JumpingPositionY()
     {
-        _playerModel.DOMoveY(_jumpValue, _jumpDuration);
+        _playerVisual.DOMoveY(_jumpValue, _jumpDuration);
         yield return new WaitForSeconds(_jumpDuration);
-        _playerModel.DOMoveY(0, _jumpDuration);
+        _playerVisual.DOMoveY(0, _jumpDuration);
     }
     private IEnumerator SpeedUpParticle()
     {

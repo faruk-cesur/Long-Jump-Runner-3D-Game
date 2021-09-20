@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         CurrentGameState = GameState.MainGame;
         UIManager.Instance.MainGameUI();
-        AnimationController.Instance.WalkAnimation();
+        CameraManager.Instance.MainGameCamera();
     }
 
     public void RestartGame()
@@ -72,13 +72,15 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         AnimationController.Instance.DeathAnimation();
+        CameraManager.Instance.LoseGameCamera();
         CurrentGameState = GameState.LoseGame;
         StartCoroutine(UIManager.Instance.DurationLoseGameUI());
-        Taptic.Failure();
+        //Taptic.Failure();
     }
 
     public void WinGame()
     {
+        CameraManager.Instance.WinGameCamera();
         UIManager.Instance.UpdateGoldInfo();
         UIManager.Instance.energySliderObject.SetActive(false);
         CurrentGameState = GameState.WinGame;

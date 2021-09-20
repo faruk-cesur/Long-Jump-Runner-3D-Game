@@ -39,6 +39,7 @@ public class SettingsManager : MonoBehaviour
     private void Start()
     {
         FirstStart();
+        Audio();
         sliderVibration.value = PlayerPrefs.GetFloat("Vibration");
         sliderAudio.value = PlayerPrefs.GetFloat("Audio");
         StartingPlayerPrefs();
@@ -117,7 +118,6 @@ public class SettingsManager : MonoBehaviour
         else
         {
             SoundManager.Instance.audioSource.mute = false;
-            SoundManager.Instance.PlaySound(SoundManager.Instance.collectShoesSound, 1f);
         }
     }
 

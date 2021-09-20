@@ -22,12 +22,14 @@ public class AnimationController : MonoBehaviour
 
     public void IdleAnimation()
     {
+        _animator.applyRootMotion = true;
         _animator.SetBool("Idle", true);
         _animator.SetBool("Run", false);
     }
 
     public void WalkAnimation()
     {
+        _animator.applyRootMotion = false;
         _animator.SetBool("Idle", false);
         _animator.SetBool("Walk", true);
         _animator.SetBool("SlowRun", false);
@@ -36,6 +38,7 @@ public class AnimationController : MonoBehaviour
 
     public void SlowRunAnimation()
     {
+        _animator.applyRootMotion = false;
         _animator.SetBool("Idle", false);
         _animator.SetBool("Walk", false);
         _animator.SetBool("SlowRun", true);
@@ -44,6 +47,7 @@ public class AnimationController : MonoBehaviour
 
     public void RunAnimation()
     {
+        _animator.applyRootMotion = false;
         _animator.SetBool("Idle", false);
         _animator.SetBool("Walk", false);
         _animator.SetBool("SlowRun", false);
