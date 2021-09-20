@@ -169,4 +169,14 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
+
+    // private void GetObstacleList()
+    // {
+    //     Obstacle obstacle = GetComponentInParent<Obstacle>();
+    //     if (obstacle)
+    //     {
+    //         obstacleListForImmortality.Add(obstacle.gameObject);
+    //         obstacleListForSpeed.Add(obstacle.GetComponent<Animator>());
+    //     }
+    // }
 }
