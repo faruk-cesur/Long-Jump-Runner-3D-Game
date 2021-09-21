@@ -59,7 +59,7 @@ public class AnimationController : MonoBehaviour
         _animator.SetBool("InjuredRun", true);
 
         yield return new WaitForSeconds(2f);
-        
+
         _animator.SetBool("InjuredRun", false);
     }
 

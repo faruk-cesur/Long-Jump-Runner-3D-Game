@@ -7,9 +7,11 @@ public class ObstacleParent : MonoBehaviour
 {
     public PlayerController player;
     private float playerPosZ;
+
     private void Start()
     {
         WithForeachLoop();
+        ObstacleSpeed();
     }
 
     private void Update()
@@ -18,6 +20,20 @@ public class ObstacleParent : MonoBehaviour
         DisappearObstacle();
     }
 
+    private void ObstacleSpeed()
+    {
+        //sliderObstacleSpeed.value = PlayerPrefs.GetFloat("ObstacleSpeed");
+
+        var speed = PlayerPrefs.GetFloat("ObstacleSpeed");
+        Debug.Log(speed);
+        foreach (var obstacle in SettingsManager.Instance.obstacleListForSpeed)
+        {
+            obstacle.SetFloat("Speed",speed);
+            Debug.Log("arda hoca kral adam");
+        }
+    }
+    
+    
     private void WithForeachLoop()
     {
         foreach (Transform child in transform)
@@ -36,7 +52,7 @@ public class ObstacleParent : MonoBehaviour
     {
         foreach (var obstacle in SettingsManager.Instance.obstacleListForImmortality)
         {
-            if (obstacle.transform.position.z < playerPosZ -10)
+            if (obstacle.transform.position.z < playerPosZ - 10)
             {
                 obstacle.SetActive(false);
             }

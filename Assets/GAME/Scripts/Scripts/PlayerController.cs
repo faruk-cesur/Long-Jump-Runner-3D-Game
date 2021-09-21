@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float longJumpTime, shoesSpeedUp = 0.25f, obstacleDamage = 1f;
 
-     public float runSpeed;
+    public float runSpeed;
 
     [SerializeField] private float _slideSpeed, _maxSlideAmount;
 
@@ -19,10 +19,16 @@ public class PlayerController : MonoBehaviour
 
     private float _jumpValue, _jumpDuration;
 
-    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive, _isGameStarted;
+    private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive, _isGameStarted, _isPlayerImmortal;
 
     #endregion
-    
+
+
+    private void Start()
+    {
+        _isPlayerImmortal = PlayerPrefs.GetFloat("Immortality") != 0;
+        
+    }
 
     private void Update()
     {
@@ -47,7 +53,7 @@ public class PlayerController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
+
         PlayerSpeedControl();
     }
 
@@ -104,6 +110,7 @@ public class PlayerController : MonoBehaviour
                 _playerVisual.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
+            Taptic.Light();
         }
 
         CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
@@ -114,13 +121,13 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SpeedUpParticle());
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectShoesSound, 1f);
             Destroy(other.gameObject);
-            //Taptic.Medium();
+            Taptic.Light();
         }
 
         Obstacle obstacle = other.GetComponentInParent<Obstacle>();
         if (!_isPlayerInteract)
         {
-            if (obstacle)
+            if (obstacle && !_isPlayerImmortal)
             {
                 StartCoroutine(PlayerInteractBool());
                 runSpeed -= obstacleDamage;
@@ -128,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(SpeedDownParticle());
                 StartCoroutine(AnimationController.Instance.InjuredRun());
                 SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
-                //Taptic.Heavy();
+                Taptic.Heavy();
             }
         }
 
@@ -150,47 +157,6 @@ public class PlayerController : MonoBehaviour
 
 
     #region Methods
-
-    public void PlayerSpeedDown()
-    {
-        runSpeed = 10f;
-        UIManager.Instance.energySlider.value = 10f;
-    }
-
-    private void PlayerDeathControl()
-    {
-        if (UIManager.Instance.energySlider.value <= 7 && !_isPlayerDead)
-        {
-            _isPlayerDead = true;
-            GetComponentInChildren<Collider>().enabled = false;
-            GameManager.Instance.LoseGame();
-        }
-    }
-
-    private void PlayerSpeedCalculate()
-    {
-        if (runSpeed < 8.25f)
-        {
-            AnimationController.Instance.WalkAnimation();
-            _isWindWalkActive = false;
-            SoundManager.Instance.WindWalkSoundStop();
-        }
-        else if (runSpeed >= 8.25f && runSpeed < 10)
-        {
-            AnimationController.Instance.SlowRunAnimation();
-            _isWindWalkActive = false;
-            SoundManager.Instance.WindWalkSoundStop();
-        }
-        else if (runSpeed >= 10)
-        {
-            AnimationController.Instance.RunAnimation();
-            if (!_isWindWalkActive)
-            {
-                _isWindWalkActive = true;
-                SoundManager.Instance.WindWalkSoundPlay();
-            }
-        }
-    }
 
     public void LongJumpCalculate()
     {
@@ -238,6 +204,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlayerSpeedDown()
+    {
+        runSpeed = 10f;
+        UIManager.Instance.energySlider.value = 10f;
+    }
+
+    private void PlayerDeathControl()
+    {
+        if (UIManager.Instance.energySlider.value <= 7 && !_isPlayerDead)
+        {
+            _isPlayerDead = true;
+            GetComponentInChildren<Collider>().enabled = false;
+            GameManager.Instance.LoseGame();
+        }
+    }
+
+    private void PlayerSpeedCalculate()
+    {
+        if (runSpeed < 8.25f)
+        {
+            AnimationController.Instance.WalkAnimation();
+            _isWindWalkActive = false;
+            SoundManager.Instance.WindWalkSoundStop();
+        }
+        else if (runSpeed >= 8.25f && runSpeed < 10)
+        {
+            AnimationController.Instance.SlowRunAnimation();
+            _isWindWalkActive = false;
+            SoundManager.Instance.WindWalkSoundStop();
+        }
+        else if (runSpeed >= 10)
+        {
+            AnimationController.Instance.RunAnimation();
+            if (!_isWindWalkActive)
+            {
+                _isWindWalkActive = true;
+                SoundManager.Instance.WindWalkSoundPlay();
+            }
+        }
+    }
+
     private void PlayerResetPositionOnStart()
     {
         if (!_isGameStarted)
@@ -273,10 +280,10 @@ public class PlayerController : MonoBehaviour
         if (!_isGameFinish)
         {
             _isGameFinish = true;
-            //Taptic.Warning();
+            Taptic.Warning();
             CameraManager.Instance.LongJumpCamera();
             SoundManager.Instance.WindWalkSoundStop();
-            SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound,1f);
+            SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound, 1f);
             _playerVisual.DOMoveX(0, 1);
             StartCoroutine(JumpingPositionY());
             StartCoroutine(AnimationController.Instance.JumpAnimation());
@@ -289,9 +296,10 @@ public class PlayerController : MonoBehaviour
             _playerVisual.localRotation = rot;
             AnimationController.Instance.WinAnimation();
             SoundManager.Instance.WinGameSound();
-            Instantiate(UIManager.Instance.confettiParticle, _playerVisual.transform.position + new Vector3(0,5,0), Quaternion.identity);
+            Instantiate(UIManager.Instance.confettiParticle, _playerVisual.transform.position + new Vector3(0, 5, 0),
+                Quaternion.identity);
             CameraManager.Instance.WinGameCamera();
-            //Taptic.Success();
+            Taptic.Success();
         }
     }
 
@@ -301,6 +309,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(_jumpDuration);
         _playerVisual.DOMoveY(0, _jumpDuration);
     }
+
     private IEnumerator SpeedUpParticle()
     {
         UIManager.Instance.speedUpUI.SetActive(true);
@@ -309,7 +318,7 @@ public class PlayerController : MonoBehaviour
         UIManager.Instance.speedUpUI.transform.DOMoveY(3, 0.01f);
         UIManager.Instance.speedUpUI.SetActive(false);
     }
-    
+
     private IEnumerator SpeedDownParticle()
     {
         UIManager.Instance.speedDownUI.SetActive(true);

@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     public static Camera Cam;
     public static CameraManager Instance;
 
-    public GameObject prepareGameCam, mainGameCam,longJumpCam, winGameCam, loseGameCam;
+    public GameObject prepareGameCam, mainGameCam, longJumpCam, winGameCam, loseGameCam;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     {
         PrepareGameCamera();
     }
-    
+
     public void PrepareGameCamera()
     {
         prepareGameCam.SetActive(true);
@@ -28,6 +28,7 @@ public class CameraManager : MonoBehaviour
         winGameCam.SetActive(false);
         loseGameCam.SetActive(false);
     }
+
     public void MainGameCamera()
     {
         prepareGameCam.SetActive(false);
@@ -45,7 +46,7 @@ public class CameraManager : MonoBehaviour
         winGameCam.SetActive(false);
         loseGameCam.SetActive(false);
     }
-    
+
     public void WinGameCamera()
     {
         prepareGameCam.SetActive(false);
@@ -54,7 +55,7 @@ public class CameraManager : MonoBehaviour
         winGameCam.SetActive(true);
         loseGameCam.SetActive(false);
     }
-    
+
     public void LoseGameCamera()
     {
         prepareGameCam.SetActive(false);

@@ -64,18 +64,12 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.RetryButton();
     }
 
-    public void NextLevel()
-    {
-        UIManager.Instance.NextLevelButton();
-    }
-
     public void LoseGame()
     {
         AnimationController.Instance.DeathAnimation();
         CameraManager.Instance.LoseGameCamera();
         CurrentGameState = GameState.LoseGame;
         StartCoroutine(UIManager.Instance.DurationLoseGameUI());
-        //Taptic.Failure();
     }
 
     public void WinGame()

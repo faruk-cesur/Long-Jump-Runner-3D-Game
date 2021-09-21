@@ -16,7 +16,14 @@ public class UIManager : MonoBehaviour
 
     public Slider distanceSlider, energySlider;
 
-    public GameObject distanceFinish, particleCollectableGold, avoidObstaclesPanel, goldCoinPanel, energySliderObject,speedUpUI, speedDownUI,confettiParticle;
+    public GameObject distanceFinish,
+        particleCollectableGold,
+        avoidObstaclesPanel,
+        goldCoinPanel,
+        energySliderObject,
+        speedUpUI,
+        speedDownUI,
+        confettiParticle;
 
     public TextMeshProUGUI currentGoldText,
         earnedGoldText,
@@ -65,7 +72,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        //PlayerPrefs.DeleteAll();
         switch (GameManager.Instance.CurrentGameState)
         {
             case GameState.PrepareGame:
@@ -80,7 +86,7 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.WinGame:
                 CalculateRoadDistance();
-                UpdateGoldInfo();   
+                UpdateGoldInfo();
                 break;
         }
     }
@@ -120,40 +126,16 @@ public class UIManager : MonoBehaviour
         _winGameUI.SetActive(true);
     }
 
-    private void CalculateRoadDistance()
-    {
-        distanceSlider.maxValue = distanceFinish.gameObject.transform.localPosition.z;
-        distanceSlider.value = player.gameObject.transform.localPosition.z;
-    }
 
-    private void SetGoldZeroOnStart()
-    {
-        gold = 0;
-    }
     public void UpdateGoldInfo()
-    { 
+    {
         CalculateBonusArrowRotation();
         currentGoldText.text = gold.ToString();
         earnedGoldText.text = currentGoldText.text;
         prepareTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
         winTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
     }
-    
 
-    private void SetPlayerPrefs()
-    {
-        if (!PlayerPrefs.HasKey("TotalGold"))
-        {
-            PlayerPrefs.SetInt("TotalGold", gold);
-        }
-
-        if (!PlayerPrefs.HasKey("SliderLevel"))
-        {
-            PlayerPrefs.SetInt("SliderLevel", sliderLevel);
-        }
-
-        sliderLevelText.text = PlayerPrefs.GetInt("SliderLevel").ToString();
-    }
 
     public IEnumerator DurationWinGameUI()
     {
@@ -166,7 +148,7 @@ public class UIManager : MonoBehaviour
         SoundManager.Instance.PlaySound(SoundManager.Instance.hitHeadSound, 1f);
         _energySliderObject.SetActive(false);
         yield return new WaitForSeconds(3f);
-        SoundManager.Instance.PlaySound(SoundManager.Instance.loseGameSound,1f);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.loseGameSound, 1f);
         LoseGameUI();
     }
 
@@ -183,7 +165,6 @@ public class UIManager : MonoBehaviour
         StartCoroutine(LevelManager.Instance.NextLevel());
     }
 
-    
 
     public void GetBonusGoldXButton()
     {
@@ -193,6 +174,7 @@ public class UIManager : MonoBehaviour
             goldenCoin.transform.DOLocalMove(new Vector3(38.7f, -50f, 0), _time);
             _time += 0.05f;
         }
+
         if (_anglerBonusArrowZ <= 360 && _anglerBonusArrowZ >= 306f)
         {
             PlayerPrefs.SetInt("TotalGold", gold * 2 + PlayerPrefs.GetInt("TotalGold"));
@@ -212,7 +194,7 @@ public class UIManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("TotalGold", gold * 5 + PlayerPrefs.GetInt("TotalGold"));
         }
-        
+
         _getGoldButton.SetActive(false);
         _getBonusGoldButton.SetActive(false);
         _bonusXArrow.SetActive(false);
@@ -262,5 +244,31 @@ public class UIManager : MonoBehaviour
             earnedGoldBonusText.text = (gold * 5).ToString();
             getExtraGoldText.text = "GET EXTRA X5";
         }
+    }
+
+    private void CalculateRoadDistance()
+    {
+        distanceSlider.maxValue = distanceFinish.gameObject.transform.localPosition.z;
+        distanceSlider.value = player.gameObject.transform.localPosition.z;
+    }
+
+    private void SetGoldZeroOnStart()
+    {
+        gold = 0;
+    }
+
+    private void SetPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey("TotalGold"))
+        {
+            PlayerPrefs.SetInt("TotalGold", gold);
+        }
+
+        if (!PlayerPrefs.HasKey("SliderLevel"))
+        {
+            PlayerPrefs.SetInt("SliderLevel", sliderLevel);
+        }
+
+        sliderLevelText.text = PlayerPrefs.GetInt("SliderLevel").ToString();
     }
 }

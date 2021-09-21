@@ -6,7 +6,13 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
 
-    public AudioClip collectGoldSound, loseGameSound, winGameSound, hitHeadSound, collectShoesSound, windWalkSound, beforeJumpSound;
+    public AudioClip collectGoldSound,
+        loseGameSound,
+        winGameSound,
+        hitHeadSound,
+        collectShoesSound,
+        windWalkSound,
+        beforeJumpSound;
 
     [HideInInspector] public AudioSource audioSource;
 
@@ -30,7 +36,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.PlayOneShot(clip, volume);
     }
-    
+
     public void WinGameSound()
     {
         audioSource.clip = winGameSound;
@@ -44,6 +50,7 @@ public class SoundManager : MonoBehaviour
         audioSource.loop = true;
         audioSource.Play();
     }
+
     public void WindWalkSoundStop()
     {
         if (audioSource.clip == windWalkSound)

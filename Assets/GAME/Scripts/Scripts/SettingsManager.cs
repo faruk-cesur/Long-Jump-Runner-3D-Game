@@ -136,11 +136,6 @@ public class SettingsManager : MonoBehaviour
     private void ObstacleSpeed()
     {
         sliderObstacleSpeed.value = PlayerPrefs.GetFloat("ObstacleSpeed");
-
-        foreach (var obstacle in obstacleListForSpeed)
-        {
-            obstacle.speed = PlayerPrefs.GetFloat("ObstacleSpeed");
-        }
     }
 
     private void ObstacleDamage()
@@ -153,27 +148,27 @@ public class SettingsManager : MonoBehaviour
     {
         sliderImmortality.value = PlayerPrefs.GetFloat("Immortality");
 
-        if (PlayerPrefs.GetFloat("Immortality") == 0)
-        {
-            foreach (var obstacle in obstacleListForImmortality)
-            {
-                var obstacles = obstacle.GetComponentsInChildren<Collider>();
-                foreach (var obstacle1 in obstacles)
-                {
-                    obstacle1.enabled = true;
-                }
-            }
-        }
-        else
-        {
-            foreach (var obstacle in obstacleListForImmortality)
-            {
-                var obstacles = obstacle.GetComponentsInChildren<Collider>();
-                foreach (var obstacle1 in obstacles)
-                {
-                    obstacle1.enabled = false;
-                }
-            }
-        }
+        // if (PlayerPrefs.GetFloat("Immortality") == 0)
+        // {
+        //     foreach (var obstacle in obstacleListForImmortality)
+        //     {
+        //         var obstacles = obstacle.GetComponentsInChildren<Collider>();
+        //         foreach (var obstacle1 in obstacles)
+        //         {
+        //             obstacle1.enabled = true;
+        //         }
+        //     }
+        // }
+        // else
+        // {
+        //     foreach (var obstacle in obstacleListForImmortality)
+        //     {
+        //         var obstacles = obstacle.GetComponentsInChildren<Collider>();
+        //         foreach (var obstacle1 in obstacles)
+        //         {
+        //             obstacle1.enabled = false;
+        //         }
+        //     }
+        // }
     }
 }
