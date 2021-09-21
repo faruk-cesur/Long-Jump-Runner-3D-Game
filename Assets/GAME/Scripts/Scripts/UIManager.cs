@@ -66,6 +66,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        //PlayerPrefs.DeleteAll();
+
         switch (GameManager.Instance.CurrentGameState)
         {
             case GameState.PrepareGame:
@@ -180,7 +182,7 @@ public class UIManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("SliderLevel", PlayerPrefs.GetInt("SliderLevel") + 1);
         sliderLevelText.text = PlayerPrefs.GetInt("SliderLevel").ToString();
-        LevelManager.Instance.NextLevel();
+        StartCoroutine(LevelManager.Instance.NextLevel());
     }
 
     public void GetBonusGoldXButton()
