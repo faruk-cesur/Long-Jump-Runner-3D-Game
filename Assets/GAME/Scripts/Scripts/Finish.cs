@@ -16,7 +16,6 @@ public class Finish : MonoBehaviour
         {
             playerController.LongJumpCalculate();
             playerController.PlayerSpeedDown();
-            playerController.finishCam = true;
             Invoke("WinMiniGame",playerController.longJumpTime);
             GameManager.Instance.WinGame();
             

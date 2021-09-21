@@ -9,8 +9,6 @@ public class PlayerController : MonoBehaviour
 {
     #region Fields
 
-    [HideInInspector] public bool finishCam;
-
     [HideInInspector] public float longJumpTime, shoesSpeedUp = 0.25f, obstacleDamage = 1f;
 
     [MinValue(7)] [MaxValue(12)] public float runSpeed;
@@ -24,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool _isPlayerInteract, _isPlayerDead, _isPlayerWin, _isGameFinish, _isWindWalkActive, _isGameStarted;
 
     #endregion
+    
 
     private void Update()
     {
@@ -103,7 +102,6 @@ public class PlayerController : MonoBehaviour
                 _playerVisual.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             SoundManager.Instance.PlaySound(SoundManager.Instance.collectGoldSound, 1f);
             Destroy(other.gameObject);
-            //Taptic.Light();
         }
 
         CollectableShoes collectableShoes = other.GetComponentInParent<CollectableShoes>();
@@ -199,36 +197,42 @@ public class PlayerController : MonoBehaviour
             longJumpTime = 1f;
             _jumpValue = 2f;
             _jumpDuration = 0.5f;
+            UIManager.Instance.getGoldText.text = "GET X1";
         }
         else if (runSpeed >= 8.25f && runSpeed < 9)
         {
             longJumpTime = 2f;
             _jumpValue = 4f;
             _jumpDuration = 1f;
+            UIManager.Instance.getGoldText.text = "GET X2";
         }
         else if (runSpeed >= 9 && runSpeed < 10)
         {
             longJumpTime = 3f;
             _jumpValue = 6f;
             _jumpDuration = 1.5f;
+            UIManager.Instance.getGoldText.text = "GET X4";
         }
         else if (runSpeed >= 10 && runSpeed < 10.75f)
         {
             longJumpTime = 4f;
             _jumpValue = 8f;
             _jumpDuration = 2f;
+            UIManager.Instance.getGoldText.text = "GET X6";
         }
         else if (runSpeed >= 10.75f && runSpeed < 11.75f)
         {
             longJumpTime = 5f;
             _jumpValue = 10f;
             _jumpDuration = 2.5f;
+            UIManager.Instance.getGoldText.text = "GET X8";
         }
         else if (runSpeed >= 11.75f)
         {
             longJumpTime = 6f;
             _jumpValue = 10f;
             _jumpDuration = 3f;
+            UIManager.Instance.getGoldText.text = "GET X10";
         }
     }
 

@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI currentGoldText,
         earnedGoldText,
         earnedGoldBonusText,
-        getGoldBonusXText,
+        getExtraGoldText,
+        getGoldText,
         prepareTotalGoldText,
         winTotalGoldText,
         sliderLevelText;
@@ -240,25 +241,25 @@ public class UIManager : MonoBehaviour
         if (anglerZ <= 0 && anglerZ >= -54f)
         {
             earnedGoldBonusText.text = (gold * 2).ToString();
-            getGoldBonusXText.text = "GET X2";
+            getExtraGoldText.text = "GET EXTRA X2";
         }
 
         if (anglerZ < -54f && anglerZ >= -110f)
         {
             earnedGoldBonusText.text = (gold * 3).ToString();
-            getGoldBonusXText.text = "GET X3";
+            getExtraGoldText.text = "GET EXTRA X3";
         }
 
         if (anglerZ < -110f && anglerZ >= -158f)
         {
             earnedGoldBonusText.text = (gold * 4).ToString();
-            getGoldBonusXText.text = "GET X4";
+            getExtraGoldText.text = "GET EXTRA X4";
         }
 
         if (anglerZ < -158f && anglerZ >= -180f)
         {
             earnedGoldBonusText.text = (gold * 5).ToString();
-            getGoldBonusXText.text = "GET X5";
+            getExtraGoldText.text = "GET EXTRA X5";
         }
     }
 }

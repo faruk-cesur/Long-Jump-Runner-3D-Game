@@ -5524,7 +5524,7 @@ GameObject:
   - component: {fileID: 831331702}
   - component: {fileID: 831331701}
   m_Layer: 5
-  m_Name: GetGoldBonusXText
+  m_Name: GetExtraGoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5539,7 +5539,7 @@ RectTransform:
   m_GameObject: {fileID: 831331699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85619825, y: 1.0965, z: 1.0965}
+  m_LocalScale: {x: 0.81338835, y: 1.041675, z: 1.041675}
   m_Children: []
   m_Father: {fileID: 1995679394}
   m_RootOrder: 0
@@ -5568,7 +5568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GET X4
+  m_text: GET EXTRA X4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990ab47cc9393fa44848752d1fc127f6, type: 2}
   m_sharedMaterial: {fileID: 7097076281067079481, guid: 990ab47cc9393fa44848752d1fc127f6,
@@ -6489,7 +6489,7 @@ GameObject:
   - component: {fileID: 1091041369}
   - component: {fileID: 1091041368}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: GetGoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6533,7 +6533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GET
+  m_text: GET X10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 990ab47cc9393fa44848752d1fc127f6, type: 2}
   m_sharedMaterial: {fileID: 7097076281067079481, guid: 990ab47cc9393fa44848752d1fc127f6,
@@ -11505,7 +11505,7 @@ GameObject:
   - component: {fileID: 1995679396}
   - component: {fileID: 1995679395}
   m_Layer: 5
-  m_Name: GetBonusButton
+  m_Name: GetExtraButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11671,7 +11671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 6, z: -20}
+  m_FollowOffset: {x: 0, y: 4, z: -22}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -12196,14 +12196,14 @@ RectTransform:
   m_GameObject: {fileID: 2074215300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.10132813, y: 0.129767, z: 0.129767}
+  m_LocalScale: {x: 0.07960595, y: 0.10194826, z: 0.10194826}
   m_Children: []
   m_Father: {fileID: 1995679394}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142.7, y: 0}
+  m_AnchoredPosition: {x: 150.6, y: -26.8}
   m_SizeDelta: {x: 695, y: 490}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2074215302
@@ -14839,7 +14839,8 @@ MonoBehaviour:
   currentGoldText: {fileID: 1179763416}
   earnedGoldText: {fileID: 6870013699264063134}
   earnedGoldBonusText: {fileID: 1217286378}
-  getGoldBonusXText: {fileID: 831331701}
+  getExtraGoldText: {fileID: 831331701}
+  getGoldText: {fileID: 1091041368}
   prepareTotalGoldText: {fileID: 9141483}
   winTotalGoldText: {fileID: 651454035}
   sliderLevelText: {fileID: 1181029499453661431}
@@ -16522,7 +16523,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -176}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 888, y: 605.14}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &6870013700642852595
