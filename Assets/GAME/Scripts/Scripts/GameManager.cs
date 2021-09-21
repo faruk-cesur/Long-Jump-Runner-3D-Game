@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        CameraManager.Instance.WinGameCamera();
         UIManager.Instance.UpdateGoldInfo();
         UIManager.Instance.energySliderObject.SetActive(false);
         CurrentGameState = GameState.WinGame;

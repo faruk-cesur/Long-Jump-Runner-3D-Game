@@ -260,6 +260,7 @@ public class PlayerController : MonoBehaviour
         {
             _isGameFinish = true;
             //Taptic.Warning();
+            CameraManager.Instance.LongJumpCamera();
             SoundManager.Instance.WindWalkSoundStop();
             SoundManager.Instance.PlaySound(SoundManager.Instance.beforeJumpSound,1f);
             _playerVisual.DOMoveX(0, 1);
@@ -275,6 +276,7 @@ public class PlayerController : MonoBehaviour
             AnimationController.Instance.WinAnimation();
             SoundManager.Instance.WinGameSound();
             Instantiate(UIManager.Instance.confettiParticle, _playerVisual.transform.position + new Vector3(0,5,0), Quaternion.identity);
+            CameraManager.Instance.WinGameCamera();
             //Taptic.Success();
         }
     }
