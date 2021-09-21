@@ -799,12 +799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f34bdffa6d4f2498196a9f2e4c763e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finishCam: 0
   longJumpTime: 0
   shoesSpeedUp: 0.25
   obstacleDamage: 0
   runSpeed: 7.75
-  _slideSpeed: 8
+  _slideSpeed: 12
   _maxSlideAmount: 7.5
   _playerVisual: {fileID: 1001228078462869411}
   _playerModel: {fileID: 8837492089328721427}

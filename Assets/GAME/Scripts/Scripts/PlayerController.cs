@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public float longJumpTime, shoesSpeedUp = 0.25f, obstacleDamage = 1f;
 
-    [MinValue(7)] [MaxValue(12)] public float runSpeed;
+     public float runSpeed;
 
     [SerializeField] private float _slideSpeed, _maxSlideAmount;
 
