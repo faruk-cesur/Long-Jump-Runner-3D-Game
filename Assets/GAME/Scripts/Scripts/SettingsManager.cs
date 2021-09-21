@@ -157,14 +157,22 @@ public class SettingsManager : MonoBehaviour
         {
             foreach (var obstacle in obstacleListForImmortality)
             {
-                obstacle.GetComponentInChildren<Collider>().enabled = true;
+                var obstacles = obstacle.GetComponentsInChildren<Collider>();
+                foreach (var obstacle1 in obstacles)
+                {
+                    obstacle1.enabled = true;
+                }
             }
         }
         else
         {
             foreach (var obstacle in obstacleListForImmortality)
             {
-                obstacle.GetComponentInChildren<Collider>().enabled = false;
+                var obstacles = obstacle.GetComponentsInChildren<Collider>();
+                foreach (var obstacle1 in obstacles)
+                {
+                    obstacle1.enabled = false;
+                }
             }
         }
     }

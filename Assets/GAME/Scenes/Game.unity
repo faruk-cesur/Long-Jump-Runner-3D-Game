@@ -930,11 +930,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spikey Overhead Trap
       objectReference: {fileID: 0}
-    - target: {fileID: 1864869926545018680, guid: 479c10f45dc785546bd10c2230d2d175,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 479c10f45dc785546bd10c2230d2d175, type: 3}
 --- !u!4 &39569793 stripped
@@ -1560,11 +1555,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spinning Saws
-      objectReference: {fileID: 0}
-    - target: {fileID: 8048301214254553427, guid: 324185d0c885f0a4dbbc267e87512ef8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 324185d0c885f0a4dbbc267e87512ef8, type: 3}
@@ -8281,11 +8271,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spinning Sticks With Spikes
       objectReference: {fileID: 0}
-    - target: {fileID: 7820680154760412245, guid: 7ff7298d264e3ed4fa12981805828b7e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff7298d264e3ed4fa12981805828b7e, type: 3}
 --- !u!4 &517197128 stripped
@@ -9084,11 +9069,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swing-Mace
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641293651057028990, guid: 35be201f299149f47b600b4daa1ab423,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35be201f299149f47b600b4daa1ab423, type: 3}
@@ -12440,11 +12420,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patrol Saw
       objectReference: {fileID: 0}
-    - target: {fileID: 2418815394099209117, guid: 703b3d19bec5d3a488c04ee354498559,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3087933762776332583, guid: 703b3d19bec5d3a488c04ee354498559,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12883,11 +12858,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swing-Axe
-      objectReference: {fileID: 0}
-    - target: {fileID: 7641293651057028990, guid: e236d8cef42d03c4e9cb0b1ed5bb6f6f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e236d8cef42d03c4e9cb0b1ed5bb6f6f, type: 3}
@@ -13837,11 +13807,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 5119070784817147118, guid: 1139a20c3f036e6448ce456217b4c02b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5494751554511271508, guid: 1139a20c3f036e6448ce456217b4c02b,
         type: 3}
@@ -23395,11 +23360,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
-    - target: {fileID: 6934473257679711482, guid: 4335b8a30175dc048878fc9f72a7ed0b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7743906588523607616, guid: 4335b8a30175dc048878fc9f72a7ed0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24360,11 +24320,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Moving Grinder
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149311822491055682, guid: 1ef26c3e869e92b49a76b5b75a577d27,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef26c3e869e92b49a76b5b75a577d27, type: 3}
@@ -28144,11 +28099,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Spikey Horizontal Trap
-      objectReference: {fileID: 0}
-    - target: {fileID: 7436825689369496560, guid: d675536efc056dd43b530cd35f29491f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7818030302335209802, guid: d675536efc056dd43b530cd35f29491f,
         type: 3}

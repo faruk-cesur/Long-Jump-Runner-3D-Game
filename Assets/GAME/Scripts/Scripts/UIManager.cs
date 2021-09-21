@@ -59,7 +59,6 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        //PlayerPrefs.DeleteAll();
         SetGoldZeroOnStart();
         SetPlayerPrefs();
     }
@@ -67,7 +66,6 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         //PlayerPrefs.DeleteAll();
-
         switch (GameManager.Instance.CurrentGameState)
         {
             case GameState.PrepareGame:
@@ -82,7 +80,7 @@ public class UIManager : MonoBehaviour
                 break;
             case GameState.WinGame:
                 CalculateRoadDistance();
-                UpdateGoldInfo();
+                UpdateGoldInfo();   
                 break;
         }
     }
@@ -132,15 +130,15 @@ public class UIManager : MonoBehaviour
     {
         gold = 0;
     }
-    
     public void UpdateGoldInfo()
-    {
+    { 
         CalculateBonusArrowRotation();
         currentGoldText.text = gold.ToString();
         earnedGoldText.text = currentGoldText.text;
         prepareTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
         winTotalGoldText.text = PlayerPrefs.GetInt("TotalGold").ToString();
     }
+    
 
     private void SetPlayerPrefs()
     {
@@ -185,6 +183,8 @@ public class UIManager : MonoBehaviour
         StartCoroutine(LevelManager.Instance.NextLevel());
     }
 
+    
+
     public void GetBonusGoldXButton()
     {
         foreach (var goldenCoin in _goldenCoins)
@@ -193,23 +193,22 @@ public class UIManager : MonoBehaviour
             goldenCoin.transform.DOLocalMove(new Vector3(38.7f, -50f, 0), _time);
             _time += 0.05f;
         }
-        
-        if (_anglerBonusArrowZ <= 0 && _anglerBonusArrowZ >= -54f)
+        if (_anglerBonusArrowZ <= 360 && _anglerBonusArrowZ >= 306f)
         {
             PlayerPrefs.SetInt("TotalGold", gold * 2 + PlayerPrefs.GetInt("TotalGold"));
         }
 
-        if (_anglerBonusArrowZ < -54f && _anglerBonusArrowZ >= -110f)
+        if (_anglerBonusArrowZ < 306f && _anglerBonusArrowZ >= 250f)
         {
             PlayerPrefs.SetInt("TotalGold", gold * 3 + PlayerPrefs.GetInt("TotalGold"));
         }
 
-        if (_anglerBonusArrowZ < -110f && _anglerBonusArrowZ >= -158f)
+        if (_anglerBonusArrowZ < 250f && _anglerBonusArrowZ >= 202f)
         {
             PlayerPrefs.SetInt("TotalGold", gold * 4 + PlayerPrefs.GetInt("TotalGold"));
         }
 
-        if (_anglerBonusArrowZ < -158f && _anglerBonusArrowZ >= -180f)
+        if (_anglerBonusArrowZ < 202f && _anglerBonusArrowZ >= 180f)
         {
             PlayerPrefs.SetInt("TotalGold", gold * 5 + PlayerPrefs.GetInt("TotalGold"));
         }
@@ -238,27 +237,27 @@ public class UIManager : MonoBehaviour
 
     private void CalculateBonusArrowRotation()
     {
-        var anglerZ = UnityEditor.TransformUtils.GetInspectorRotation(_bonusPointArrow.transform).z;
+        var anglerZ = _bonusPointArrow.transform.localEulerAngles.z;
         _anglerBonusArrowZ = anglerZ;
-        if (anglerZ <= 0 && anglerZ >= -54f)
+        if (anglerZ <= 360 && anglerZ >= 306f)
         {
             earnedGoldBonusText.text = (gold * 2).ToString();
             getExtraGoldText.text = "GET EXTRA X2";
         }
 
-        if (anglerZ < -54f && anglerZ >= -110f)
+        if (anglerZ < 306f && anglerZ >= 250f)
         {
             earnedGoldBonusText.text = (gold * 3).ToString();
             getExtraGoldText.text = "GET EXTRA X3";
         }
 
-        if (anglerZ < -110f && anglerZ >= -158f)
+        if (anglerZ < 250f && anglerZ >= 202f)
         {
             earnedGoldBonusText.text = (gold * 4).ToString();
             getExtraGoldText.text = "GET EXTRA X4";
         }
 
-        if (anglerZ < -158f && anglerZ >= -180f)
+        if (anglerZ < 202f && anglerZ >= 180f)
         {
             earnedGoldBonusText.text = (gold * 5).ToString();
             getExtraGoldText.text = "GET EXTRA X5";
