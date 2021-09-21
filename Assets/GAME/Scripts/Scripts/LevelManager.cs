@@ -9,6 +9,12 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
+    public List<GameObject> levels;
+
+    [HideInInspector] public int currentLevel;
+
+    private float levelNumber;
+
     private void Awake()
     {
         if (Instance == null)
@@ -20,10 +26,6 @@ public class LevelManager : MonoBehaviour
             Destroy(this);
         }
     }
-
-    public List<GameObject> levels;
-
-    [HideInInspector] public int currentLevel;
 
     private void Start()
     {
@@ -43,22 +45,23 @@ public class LevelManager : MonoBehaviour
             currentLevel = 1;
             PlayerPrefs.SetInt("CurrentLevel", currentLevel);
         }
+        else
+        {
+            currentLevel = PlayerPrefs.GetInt("CurrentLevel");
+        }
     }
-
 
     public void CallLevel()
     {
-        for (int i = 0; i < levels.Count + 1; i++)
+        if (currentLevel > levels.Count)
         {
-            if (PlayerPrefs.GetInt("CurrentLevel") == i)
-            {
-                levels[i - 1].SetActive(true);
-
-                if (PlayerPrefs.GetInt("CurrentLevel") != 1)
-                {
-                    levels[i - 2].SetActive(false);
-                }
-            }
+            currentLevel = 2;
+            PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+            levels[PlayerPrefs.GetInt("CurrentLevel") - 1].SetActive(true);
+        }
+        else
+        {
+            levels[PlayerPrefs.GetInt("CurrentLevel") - 1].SetActive(true);
         }
     }
 

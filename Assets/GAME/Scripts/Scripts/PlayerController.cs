@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+        
+        PlayerSpeedControl();
     }
 
     #region PlayerMovement
@@ -243,6 +245,14 @@ public class PlayerController : MonoBehaviour
             _isGameStarted = true;
             _playerModel.transform.position = new Vector3(0, 0, 3);
             _playerModel.transform.rotation = Quaternion.identity;
+        }
+    }
+
+    private void PlayerSpeedControl()
+    {
+        if (runSpeed > 12)
+        {
+            runSpeed = 12f;
         }
     }
 
