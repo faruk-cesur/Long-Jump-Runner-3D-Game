@@ -3,7 +3,7 @@
 ---
 ### [Click To Watch 1080p HD Fullscreen](https://www.youtube.com/watch?v=0MKOLVVSTIU)
 
-![LongJumpRunner3D](https://i.giphy.com/YRIfkKAwo4UHykbLMW.gif)
+![PickyRunner3D](https://i.giphy.com/media/YRIfkKAwo4UHykbLMW/giphy.webp)
 
 ---
 # I have developed this game from scratch. Ideation, theme and everything else belongs to me.
